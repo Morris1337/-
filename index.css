@@ -1,0 +1,19 @@
+
+.background{
+    width: auto;
+    height: 690px;
+    background-image: url(background/Mortal-Kombat-11-tile-image.jpg);
+}
+
+.fighterUl{
+    display: flex;
+    justify-content: center;
+}
+
+.fighter1{
+
+}
+
+.fighter2{
+
+}
