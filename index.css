@@ -1,8 +1,15 @@
+body{
+    background: -webkit-linear-gradient(top, #000000, #6d0404);
+    background-size: cover;
+    margin: 0;
+}
 
 .background{
-    width: auto;
-    height: 690px;
     background-image: url(background/Mortal-Kombat-11-tile-image.jpg);
+    height: 46vw;
+    background-size: cover;
+    background-position: center;
+
 }
 
 .fighterUl{
