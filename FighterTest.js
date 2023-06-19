@@ -5,6 +5,13 @@ const limbs = [
     { limbName: "lLeg", limbHealth: 10, gettingDamage: 3 },
 ];
 
+const weapon = [
+    {weaponName: "knife", weaponDamage: 5}
+    {weaponName: "sword", weaponDamage: 10}
+    {weaponName: "spear", weaponDamage: 15}
+    {weaponName: "axe", weaponDamage: 20}
+]
+
 const fighterHealth = 100
 
 class Fighter {
@@ -27,7 +34,7 @@ class Fighter {
     
     getDamage() {
         if (!this.isDefeat) {
-            this.health -= 10;
+            this.health -= Math.floor(Math.random() * 10) + 1;
             if (this.health > 0) {
                 console.log(`У бойца ${this.name} осталось ${this.health} единиц здоровья`);
             } else {
@@ -42,12 +49,13 @@ class Limb {
     constructor({ limbName, limbHealth, gettingDamage }) {
         this.name = limbName;
         this.health = limbHealth;
-        this.gettingDamage = gettingDamage;
+        this.gettingDamage = gettingDamage
         this.isBroken = false;
     }
     
     getLimbDamage() {
         if (!this.isBroken) {
+            this.gettingDamage = Math.floor(Math.random() * 3) + 1;
             this.health -= this.gettingDamage;
             if (this.health > 0) {
                 console.log(`У конечности ${this.name} осталось ${this.health} единиц здоровья`);

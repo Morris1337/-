@@ -2,6 +2,8 @@ body{
     background: -webkit-linear-gradient(top, #000000, #6d0404);
     background-size: cover;
     margin: 0;
+    background-repeat: no-repeat;
+    height: 100vh;
 }
 
 .background{
