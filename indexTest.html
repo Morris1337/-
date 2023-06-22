@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="FighterTest.js"></script>
     <link rel="stylesheet" href="index.css">
     <title>Document</title>
 </head>
@@ -16,33 +15,39 @@
 </header>
 <body>
 <nav class="background">
+    <nav class="fighterImage">
+        <div>
+            <img class="fighter1" src="fighter/Fighter1-1-removebg-preview.png" alt="">
+        </div>
+        <div>
+            <img class="fighter2" src="fighter/fighter2-1-removebg-preview.png" alt="">
+        </div>
+    </nav>
     <div class="fighterUl">
         <ul>
-            <div class="fighter1">
-                <img src="fighter/Fighter1-1-removebg-preview.png" alt="">
-            </div>
+
             <li>
-                <input type="button" onclick="neo.getDamage()" value="Fighter" id="fighter">
+                <input id="Fighter-1" type="button" value="Fighter" id="fighter">
             </li>
-            <li><input type="button" onclick="neo.lLeg.getLimbDamage()" value="Left leg"></li>
-            <li><input type="button" onclick="neo.rLeg.getLimbDamage()" value="Right leg"></li>
-            <li><input type="button" onclick="neo.lArm.getLimbDamage()" value="Left arm"></li>
-            <li><input type="button" onclick="neo.rArm.getLimbDamage()" value="Right arm"></li>
-            <li><input type="button" id="test-button" class="test-button"  value="test"></li>
+            <div class="Limb-1" id="Limb-1">
+                <input type="button" class="button" id="Left-leg-1" value="Left leg">
+                <input type="button" class="button" id="Left-arm-1"  value="Left arm">
+                <input type="button" class="button" id="Right-leg-1" value="Right leg">
+                <input type="button" class="button" id="Right-arm-1"  value="Right arm">
+            </div>
         </ul>
         <ul>
-            <div class="fighter2">
-                <img src="fighter/fighter2-1-removebg-preview.png" alt="">
-            </div>
+
             <li>
-                <input type="button" onclick=" smith.getDamage()" value="Fighter">
+                <input type="button" id="Fighter-2" onclick=" smith.getDamage()" value="Fighter">
             </li>
-            <li><input type="button" onclick="smith.lLeg.getLimbDamage()" value="Left leg"></li>
-            <li><input type="button" onclick="smith.rLeg.getLimbDamage()" value="Right leg"></li>
-            <li><input type="button" onclick="smith.lArm.getLimbDamage()" value="Left arm"></li>
-            <li><input type="button" onclick="smith.rArm.getLimbDamage()" value="Right arm"></li>
+            <li><input type="button" id="Left-leg-2" onclick="smith.lLeg.getLimbDamage()" value="Left leg"></li>
+            <li><input type="button" id="Right-leg-2" onclick="smith.rLeg.getLimbDamage()" value="Right leg"></li>
+            <li><input type="button" id="Left-arm-2" onclick="smith.lArm.getLimbDamage()" value="Left arm"></li>
+            <li><input type="button" id="Right-arm-2" onclick="smith.rArm.getLimbDamage()" value="Right arm"></li>
         </ul>
     </div>
 </nav>
+<script src="FighterTest.js"></script>
 </body>
 </html>

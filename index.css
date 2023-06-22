@@ -14,15 +14,30 @@ body{
 
 }
 
-.fighterUl{
+.fighterImage{
     display: flex;
-    justify-content: center;
+    justify-content: center; 
 }
 
-.fighter1{
+.fighterUl{
+    display: flex;
+    justify-content: center; 
+}
 
+
+
+.fighter1{
+    width: 100%;
+    height: auto;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .fighter2{
-
+    width: 100%;
+    height: auto;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
