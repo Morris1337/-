@@ -71,61 +71,56 @@ class Limb {
     }
 }
 
-
-let neo = new Fighter("neo", fighterHealth, limbs);
+const neo = new Fighter("neo", fighterHealth, limbs);
 const smith = new Fighter("Smith", fighterHealth, limbs);
 const fighter1 = document.querySelector("#Fighter-1", ".button")
 const leftLeg1 = document.querySelector("#Left-leg-1", ".button")
 const rightLeg1 = document.querySelector("#Right-leg-1", ".button")
 const leftArm1 = document.querySelector("#Left-arm-1", ".button")
 const rightArm1 = document.querySelector("#Right-arm-1", ".button")
-const buttons = document.querySelectorAll("button")
+const buttons = document.querySelectorAll("button-1")
 
 
 
 fighter1.addEventListener("click", function(){
     neo.getDamage()
-    if(neo.health <= 100)
-    fighter1.style.background =  "green"
-    if(neo.health <= 80)
-    fighter1.style.background =  ("-webkit-linear-gradient(top, green, yellow)")
-    if(neo.health <= 60)
-    fighter1.style.background = "yellow"
-    if(neo.health <= 40)
-    fighter1.style.background =  ("-webkit-linear-gradient(top, yellow, red)")
     if(neo.health <= 20)
+    fighter1.style.background = "green"
+    if(neo.health <= 13)
+    fighter1.style.background = "yellow"
+    if(neo.health <= 7)
     fighter1.style.background = "red"
     if(neo.health <= 0)
     fighter1.setAttribute("disabled", "")
 })
 
+buttons.forEach(function(){
+    buttons.addEventListener("click", function(){
+        neo.lLeg.getLimbDamage()
+        if(neo.lLeg.health <= 20)
+        buttons.style.background = "green"
+        if(neo.lLeg.health <= 13)
+        buttons.style.background = "yellow"
+        if(neo.lLeg.health <= 7)
+        buttons.style.background = "red"
+        if(neo.lLeg.health <= 0)
+        buttons.setAttribute("disabled", "")
 
-leftLeg1.addEventListener("click", function(){
-    neo.lLeg.getLimbDamage()
-    if(neo.lLeg.health <= 20)
-    leftLeg1.style.background = "green"
-    if(neo.lLeg.health <= 13)
-    leftLeg1.style.background = "yellow"
-    if(neo.lLeg.health <= 7)
-    leftLeg1.style.background = "red"
-    if(neo.lLeg.health <= 0)
-    leftLeg1.setAttribute("disabled", "")
+})})
 
-})
 
-// buttons.forEach(button => {
-//     button.addEventListener("click", function(){
-//         neo.limbHealth.getLimbDamage()
-//         if(limbs.limbHealth <= 20)
-//         button.style.background = "green"
-//         if(limbs.limbHealth.health <= 13)
-//         button.style.background = "yellow"
-//         if(limbs.limbHealth.health <= 7)
-//         button.style.background = "red"
-//         if(limbs.limbHealth.health <= 0)
-//         button.setAttribute("disabled", "")
+// leftLeg1.addEventListener("click", function(){
+//     neo.lLeg.getLimbDamage()
+//     if(neo.lLeg.health <= 20)
+//     leftLeg1.style.background = "green"
+//     if(neo.lLeg.health <= 13)
+//     leftLeg1.style.background = "yellow"
+//     if(neo.lLeg.health <= 7)
+//     leftLeg1.style.background = "red"
+//     if(neo.lLeg.health <= 0)
+//     leftLeg1.setAttribute("disabled", "")
 
-// })})
+// })
 
     rightLeg1.addEventListener("click", function(){
     neo.rLeg.getLimbDamage()
@@ -168,3 +163,21 @@ leftLeg1.addEventListener("click", function(){
         
     }
     )
+
+    // rightLeg1.addEventListener("click", function(){
+    //     neo.rLeg.getLimbDamage()
+    //     switch (neo.rLeg.health){
+    //         case (14 < 20):
+    //             rightLeg1.style.background = "green"
+    //         break
+    //         case (8 < 13):
+    //             rightLeg1.style.background = "yellow"
+    //         break
+    //         case -7:
+    //             rightLeg1.style.background = "red"
+    //         break
+    //         case -0:
+    //             rightLeg1.setAttribute("disabled", "")
+    //         break
+    //     }}
+    // )
