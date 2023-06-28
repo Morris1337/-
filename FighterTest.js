@@ -88,6 +88,8 @@ class Limb {
 }
 
 
+
+
 let neo = new Fighter("neo", fighterHealth, limbs);
 neo.createFighter()
 const smith = new Fighter("Smith", fighterHealth, limbs);
