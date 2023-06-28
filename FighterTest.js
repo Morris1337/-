@@ -1,4 +1,5 @@
 
+const fighterConteiner = document.querySelector(".fighterUl")
 
 const limbs = [
     { limbName: "rArm", limbHealth: 20, gettingDamage: 5 },
@@ -21,18 +22,19 @@ class Fighter {
         this.name = fighterName;
         this.health = fighterHealth;
         this.isDefeat = false;
-        this.getDamage = this.getDamage.bind(this);
+        this.limbs = limbs.map(limb => new Limb(limb) )
+        // this.getDamage = this.getDamage.bind(this);
         
         
-        for (let i = 0; i < limbs.length; i++) {
-            const limbName = limbs[i].limbName
-            this[limbName] = new Limb(limbs[i]);
-            const getLimbDamage = this[limbName].getLimbDamage.bind(this[limbName])
-            this[limbName].getLimbDamage = () => {
-                getLimbDamage()
-                this.getDamage();
-            }
-        }
+        // for (let i = 0; i < limbs.length; i++) {
+        //     const limbName = limbs[i].limbName
+        //     this[limbName] = new Limb(limbs[i]);
+        //     const getLimbDamage = this[limbName].getLimbDamage.bind(this[limbName])
+        //     this[limbName].getLimbDamage = () => {
+        //         getLimbDamage()
+        //         this.getDamage();
+        //     }
+        // }
     }
     
     getDamage() {
@@ -45,6 +47,20 @@ class Fighter {
                 console.log(`Боец ${this.name} повержен`);
             }
         }
+    }
+
+    createFighter(){
+        const div = document.createElement("div")
+        this.limbs.forEach(limb =>{
+            const button = document.createElement("button")
+            button.textContent = limb.name
+            button.addEventListener("click", ()=>{
+                this.getDamage()
+                limb.getLimbDamage()
+            })
+            div.appendChild(button)
+        })
+        fighterConteiner.appendChild(div)
     }
 
     
@@ -73,6 +89,7 @@ class Limb {
 
 
 let neo = new Fighter("neo", fighterHealth, limbs);
+neo.createFighter()
 const smith = new Fighter("Smith", fighterHealth, limbs);
 const fighter1 = document.querySelector("#Fighter-1", ".button")
 const leftLeg1 = document.querySelector("#Left-leg-1", ".button")
@@ -83,35 +100,37 @@ const buttons = document.querySelectorAll("button")
 
 
 
-fighter1.addEventListener("click", function(){
-    neo.getDamage()
-    if(neo.health <= 100)
-    fighter1.style.background =  "green"
-    if(neo.health <= 80)
-    fighter1.style.background =  ("-webkit-linear-gradient(top, green, yellow)")
-    if(neo.health <= 60)
-    fighter1.style.background = "yellow"
-    if(neo.health <= 40)
-    fighter1.style.background =  ("-webkit-linear-gradient(top, yellow, red)")
-    if(neo.health <= 20)
-    fighter1.style.background = "red"
-    if(neo.health <= 0)
-    fighter1.setAttribute("disabled", "")
-})
 
 
-leftLeg1.addEventListener("click", function(){
-    neo.lLeg.getLimbDamage()
-    if(neo.lLeg.health <= 20)
-    leftLeg1.style.background = "green"
-    if(neo.lLeg.health <= 13)
-    leftLeg1.style.background = "yellow"
-    if(neo.lLeg.health <= 7)
-    leftLeg1.style.background = "red"
-    if(neo.lLeg.health <= 0)
-    leftLeg1.setAttribute("disabled", "")
+// fighter1.addEventListener("click", function(){
+//     neo.getDamage()
+//     if(neo.health <= 100)
+//     fighter1.style.background =  "green"
+//     if(neo.health <= 80)
+//     fighter1.style.background =  ("-webkit-linear-gradient(top, green, yellow)")
+//     if(neo.health <= 60)
+//     fighter1.style.background = "yellow"
+//     if(neo.health <= 40)
+//     fighter1.style.background =  ("-webkit-linear-gradient(top, yellow, red)")
+//     if(neo.health <= 20)
+//     fighter1.style.background = "red"
+//     if(neo.health <= 0)
+//     fighter1.setAttribute("disabled", "")
+// })
 
-})
+
+// leftLeg1.addEventListener("click", function(){
+//     neo.lLeg.getLimbDamage()
+//     if(neo.lLeg.health <= 20)
+//     leftLeg1.style.background = "green"
+//     if(neo.lLeg.health <= 13)
+//     leftLeg1.style.background = "yellow"
+//     if(neo.lLeg.health <= 7)
+//     leftLeg1.style.background = "red"
+//     if(neo.lLeg.health <= 0)
+//     leftLeg1.setAttribute("disabled", "")
+
+// })
 
 
 // leftLeg1.addEventListener("click", function(){
@@ -141,44 +160,44 @@ leftLeg1.addEventListener("click", function(){
 
 // })})
 
-    rightLeg1.addEventListener("click", function(){
-    neo.rLeg.getLimbDamage()
-    if(neo.rLeg.health <= 20)
-        rightLeg1.style.background = "green"
-    if(neo.rLeg.health <= 13)
-        rightLeg1.style.background = "yellow"
-    if(neo.rLeg.health <= 7)
-        rightLeg1.style.background = "red"
-    if(neo.rLeg.health <= 0)
-        rightLeg1.setAttribute("disabled", "")
+    // rightLeg1.addEventListener("click", function(){
+    // neo.rLeg.getLimbDamage()
+    // if(neo.rLeg.health <= 20)
+    //     rightLeg1.style.background = "green"
+    // if(neo.rLeg.health <= 13)
+    //     rightLeg1.style.background = "yellow"
+    // if(neo.rLeg.health <= 7)
+    //     rightLeg1.style.background = "red"
+    // if(neo.rLeg.health <= 0)
+    //     rightLeg1.setAttribute("disabled", "")
         
-    }
-    )
+    // }
+    // )
 
-    leftArm1.addEventListener("click", function(){
-        neo.lArm.getLimbDamage()
-        if(neo.lArm.health <= 20)
-        leftArm1.style.background = "green"
-        if(neo.lArm.health <= 13)
-        leftArm1.style.background = "yellow"
-        if(neo.lArm.health <= 7)
-        leftArm1.style.background = "red"
-        if(neo.lArm.health <= 0)
-        leftArm1.setAttribute("disabled", "")
+    // leftArm1.addEventListener("click", function(){
+    //     neo.lArm.getLimbDamage()
+    //     if(neo.lArm.health <= 20)
+    //     leftArm1.style.background = "green"
+    //     if(neo.lArm.health <= 13)
+    //     leftArm1.style.background = "yellow"
+    //     if(neo.lArm.health <= 7)
+    //     leftArm1.style.background = "red"
+    //     if(neo.lArm.health <= 0)
+    //     leftArm1.setAttribute("disabled", "")
         
-    }
-    )
+    // }
+    // )
 
-    rightArm1.addEventListener("click", function(){
-        neo.rArm.getLimbDamage()
-        if(neo.rArm.health <= 20)
-        rightArm1.style.background = "green"
-        if(neo.rArm.health <= 13)
-        rightArm1.style.background = "yellow"
-        if(neo.rArm.health <= 7)
-        rightArm1.style.background = "red"
-        if(neo.rArm.health <= 0)
-        rightArm1.setAttribute("disabled", "")
+    // rightArm1.addEventListener("click", function(){
+    //     neo.rArm.getLimbDamage()
+    //     if(neo.rArm.health <= 20)
+    //     rightArm1.style.background = "green"
+    //     if(neo.rArm.health <= 13)
+    //     rightArm1.style.background = "yellow"
+    //     if(neo.rArm.health <= 7)
+    //     rightArm1.style.background = "red"
+    //     if(neo.rArm.health <= 0)
+    //     rightArm1.setAttribute("disabled", "")
         
-    }
-    )
+    // }
+    // )
