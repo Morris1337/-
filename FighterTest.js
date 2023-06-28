@@ -113,6 +113,20 @@ leftLeg1.addEventListener("click", function(){
 
 })
 
+
+// leftLeg1.addEventListener("click", function(){
+//     neo.lLeg.getLimbDamage()
+//     if(neo.lLeg.health <= 20)
+//     leftLeg1.style.background = "green"
+//     if(neo.lLeg.health <= 13)
+//     leftLeg1.style.background = "yellow"
+//     if(neo.lLeg.health <= 7)
+//     leftLeg1.style.background = "red"
+//     if(neo.lLeg.health <= 0)
+//     leftLeg1.setAttribute("disabled", "")
+
+// })
+
 // buttons.forEach(button => {
 //     button.addEventListener("click", function(){
 //         neo.limbHealth.getLimbDamage()
