@@ -1,7 +1,10 @@
 
 const fighterConteiner = document.querySelector(".fighterUl")
+const createFighter = document.querySelector("#createFighter1")
+const formCreateFighter = document.querySelectorAll(".openForm")
 
 const limbs = [
+    { limbName: "head", limbHealth: 20, gettingDamage: 10},
     { limbName: "rArm", limbHealth: 20, gettingDamage: 5 },
     { limbName: "lArm", limbHealth: 20, gettingDamage: 5 },
     { limbName: "rLeg", limbHealth: 20, gettingDamage: 3 },
@@ -16,6 +19,20 @@ const limbs = [
 // ]
 
 const fighterHealth = 100
+
+createFighter.addEventListener("click", ()=>{
+    formCreateFighter.classList.add("open");
+})
+
+    // createFighter.addEventListener("click", ()=>{
+    //     const input = document.createElement("input")
+    //     input.name = "Fighter Name";
+    //     // input.addEventListener("input", (event)=>{
+    //     //     console.log(event)
+    //     // })
+    //     createFighter.appendChild(input)
+    // })
+
 
 class Fighter {
     constructor(fighterName, fighterHealth, limbs) {
@@ -48,6 +65,8 @@ class Fighter {
             }
         }
     }
+
+
 
     createFighter(){
         const div = document.createElement("div")
@@ -98,10 +117,6 @@ const leftLeg1 = document.querySelector("#Left-leg-1", ".button")
 const rightLeg1 = document.querySelector("#Right-leg-1", ".button")
 const leftArm1 = document.querySelector("#Left-arm-1", ".button")
 const rightArm1 = document.querySelector("#Right-arm-1", ".button")
-const buttons = document.querySelectorAll("button")
-
-
-
 
 
 // fighter1.addEventListener("click", function(){

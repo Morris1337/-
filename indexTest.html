@@ -16,8 +16,24 @@
 <body>
 <nav class="background">
     <nav>
-        <div>
-            
+        <div id="createFighter1">
+            <button>
+                Create fighter
+            </button>
+        </div>
+        <div class="openForm">
+            <form role="form" action="/requestFine" autocomplete="off" method="POST">
+                <label for="">Fighter Name</label>
+                <input type="text" name="fighterName" placeholder="Ivan">
+                <label for="">class</label>
+                <select name="" id="">
+                    <option value="">Kratos</option>
+                    <option value="">Sasuke</option>
+                    <option value="">GORO</option>
+                    <option value="">Saitama</option>
+                </select>
+                <button type="submit" class="btn btn-success">Send</button>
+            </form>
         </div>
     </nav>
     <nav class="fighterImage">
