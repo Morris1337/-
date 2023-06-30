@@ -1,7 +1,8 @@
 
 const fighterConteiner = document.querySelector(".fighterUl")
-const createFighter = document.querySelector("#createFighter1")
+const createFighter = document.querySelector("#createFighter")
 const formCreateFighter = document.querySelector(".openForm")
+const formCreateFighterClose = document.querySelector("#createFighterClose")
 
 const limbs = [
     { limbName: "head", limbHealth: 20, gettingDamage: 10},
@@ -21,8 +22,18 @@ const limbs = [
 const fighterHealth = 100
 
 createFighter.addEventListener("click", ()=>{
-    formCreateFighter.classList.add(formCreateFighter)
+    formCreateFighter.classList.add("open")
+    formCreateFighterClose.classList.add("open")
 })
+
+formCreateFighterClose.addEventListener("click", ()=>{
+    formCreateFighter.classList.remove("open")
+    formCreateFighterClose.classList.remove("open")
+    
+})
+
+
+
 
     // createFighter.addEventListener("click", ()=>{
     //     const input = document.createElement("input")

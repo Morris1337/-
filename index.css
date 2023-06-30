@@ -42,6 +42,28 @@ body{
     background-position: center;
 }
 
+.header-create-fighter{
+    display: flex;
+}
+#createFighterClose{
+    margin-left: 20px;
+}
+
+.btn-new {
+    text-align: center;
+    transition: 0.5s;
+    background-size: 200% auto;
+    font-size: 20px;
+    color: white;
+    box-shadow: 0 0 10px #eee;
+    border-radius: 20px;
+    background-image: linear-gradient(to right, #6d0404 0%, #c92d2d 51%, #6d0404 100%);
+}
+
+.btn-new:hover {
+     background-position: right center;
+}
+
 .openForm{
     display: none;
     animation-duration: 1.5s;
@@ -50,8 +72,23 @@ body{
 }
 
 .openForm.open{
-    display: block;
+    display: flex;
 }
+
+
+
+#createFighterClose{
+    display: none;
+    animation-duration: 1.5s;
+    animation-fill-mode: both;
+    animation-name: fadeIn;
+}
+
+#createFighterClose.open{
+    display: flex;
+}
+
+
 
 @keyframes fadeIn {
     from {
