@@ -6,6 +6,7 @@ const createFighter = document.querySelector("#createFighter")
 const formCreateFighter = document.querySelector(".openForm")
 const formCreateFighterClose = document.querySelector("#createFighterClose")
 const healthValue = document.querySelector("#fighterHealthBar")
+const submit = document.querySelector("#submit")
 
 const limbs = [
     { limbName: "Head", limbHealth: 10, gettingDamage: 5},
@@ -34,6 +35,10 @@ formCreateFighterClose.addEventListener("click", ()=>{
     formCreateFighter.classList.add("close")
     formCreateFighterClose.classList.add("close")
 })
+
+submit.addEventListener("click", ()=>{
+    if()
+} )
 
 
 
