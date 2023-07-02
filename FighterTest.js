@@ -1,15 +1,19 @@
+// const charKratos = document.querySelectorAll("option.Kratos")
+
 
 const fighterConteiner = document.querySelector(".fighterUl")
 const createFighter = document.querySelector("#createFighter")
 const formCreateFighter = document.querySelector(".openForm")
 const formCreateFighterClose = document.querySelector("#createFighterClose")
+const healthValue = document.querySelector("#fighterHealthBar")
 
 const limbs = [
-    { limbName: "head", limbHealth: 20, gettingDamage: 10},
-    { limbName: "rArm", limbHealth: 20, gettingDamage: 5 },
-    { limbName: "lArm", limbHealth: 20, gettingDamage: 5 },
-    { limbName: "rLeg", limbHealth: 20, gettingDamage: 3 },
-    { limbName: "lLeg", limbHealth: 20, gettingDamage: 3 },
+    { limbName: "Head", limbHealth: 10, gettingDamage: 5},
+    { limbName: "Body", limbHealth: 50, gettingDamage: 10},  
+    { limbName: "Right Arm", limbHealth: 10, gettingDamage: 5 },
+    { limbName: "Left Arm", limbHealth: 10, gettingDamage: 5 },
+    { limbName: "Right Leg", limbHealth: 10, gettingDamage: 3 },
+    { limbName: "Left Leg", limbHealth: 10, gettingDamage: 3 },
 ];
 
 // const weapon = [
@@ -27,9 +31,8 @@ createFighter.addEventListener("click", ()=>{
 })
 
 formCreateFighterClose.addEventListener("click", ()=>{
-    formCreateFighter.classList.remove("open")
-    formCreateFighterClose.classList.remove("open")
-    
+    formCreateFighter.classList.add("close")
+    formCreateFighterClose.classList.add("close")
 })
 
 
@@ -47,7 +50,7 @@ formCreateFighterClose.addEventListener("click", ()=>{
 
 class Fighter {
     constructor(fighterName, fighterHealth, limbs) {
-        this.name = fighterName;
+        this.name = document.querySelector("#fighterName");
         this.health = fighterHealth;
         this.isDefeat = false;
         this.limbs = limbs.map(limb => new Limb(limb) )
@@ -65,9 +68,9 @@ class Fighter {
         // }
     }
     
-    getDamage() {
+    getDamage(damage) {
         if (!this.isDefeat) {
-            this.health -= Math.floor(Math.random() * 10) + 1;
+            this.health -= damage;
             if (this.health > 0) {
                 console.log(`У бойца ${this.name} осталось ${this.health} единиц здоровья`);
             } else {
@@ -83,10 +86,32 @@ class Fighter {
         const div = document.createElement("div")
         this.limbs.forEach(limb =>{
             const button = document.createElement("button")
+            const progress = document.createElement("progress")
+
+            progress
             button.textContent = limb.name
             button.addEventListener("click", ()=>{
-                this.getDamage()
                 limb.getLimbDamage()
+                switch (true) {
+                    case (fighterHealth <= 100):
+                      button.style.background = "green";
+                      break;
+                    case (fighterHealth <= 80):
+                      button.style.background = "-webkit-linear-gradient(top, green, yellow)";
+                      break;
+                    case (fighterHealth <= 60):
+                      button.style.background = "yellow";
+                      break;
+                    case (fighterHealth <= 40):
+                      button.style.background = "-webkit-linear-gradient(top, yellow, red)";
+                      break;
+                    case (fighterHealth <= 20):
+                      button.style.background = "red";
+                      break;
+                    case (fighterHealth <= 0):
+                      button.setAttribute("disabled", "");
+                      break;
+                }
             })
             div.appendChild(button)
         })
@@ -101,6 +126,7 @@ class Limb {
         this.name = limbName;
         this.health = limbHealth;
         this.gettingDamage = gettingDamage
+
         this.isBroken = false;
     }
     
@@ -113,6 +139,7 @@ class Limb {
             } else {
                 this.isBroken = true;
             }
+            fighter.getDamage(this.gettingDamage)
         }
     }
 }
@@ -120,8 +147,15 @@ class Limb {
 
 
 
-let neo = new Fighter("neo", fighterHealth, limbs);
-neo.createFighter()
+// submitForm.addEventListener("click", ()=>{
+//     formCreateFighter.classList.add("open")
+//     formCreateFighterClose.classList.add("open")
+//     console.log(submitForm)
+// })
+
+
+let fighter = new Fighter("fighterName", fighterHealth, limbs);
+fighter.createFighter()
 const smith = new Fighter("Smith", fighterHealth, limbs);
 const fighter1 = document.querySelector("#Fighter-1", ".button")
 const leftLeg1 = document.querySelector("#Left-leg-1", ".button")

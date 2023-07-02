@@ -1,9 +1,20 @@
+header{
+    height: 50px;
+    background-color: #360101;
+}
+
 body{
     background: -webkit-linear-gradient(top, #000000, #6d0404);
     background-size: cover;
     margin: 0;
     background-repeat: no-repeat;
     height: 100vh;
+}
+
+.imageSize{
+    background-size: cover;
+    margin: 0;
+    background-repeat: no-repeat;
 }
 
 .background{
@@ -15,13 +26,27 @@ body{
 }
 
 .fighterImage{
-    display: flex;
+    display: grid;
     justify-content: center; 
+    grid-template-columns: repeat(2, 37%); 
 }
 
 .fighterUl{
     display: flex;
-    justify-content: center; 
+    justify-content:baseline 
+}
+
+#fighterHealthBar{
+    position: relative;
+    border-radius: 4px;
+    background: green;
+    transform-origin: center;
+    zoom: 1;
+}
+
+#fighterHealthBar::-webkit-progress-bar {
+    background: #360101;
+  
 }
 
 
@@ -44,9 +69,7 @@ body{
 
 .header-create-fighter{
     display: flex;
-}
-#createFighterClose{
-    margin-left: 20px;
+    padding: 10px;
 }
 
 .btn-new {
@@ -65,6 +88,12 @@ body{
 }
 
 .openForm{
+    color: white;
+    position: absolute;
+    width: 200px;
+    padding: 10px;
+    line-height: 26px;
+    border-radius: 1px;
     display: none;
     animation-duration: 1.5s;
     animation-fill-mode: both;
@@ -75,18 +104,31 @@ body{
     display: flex;
 }
 
+.openForm.close{
+    animation-name: fadeOut;
+}
 
 
 #createFighterClose{
     display: none;
+    margin-left: 20px;
     animation-duration: 1.5s;
     animation-fill-mode: both;
     animation-name: fadeIn;
 }
 
 #createFighterClose.open{
-    display: flex;
+    display: block;
 }
+
+#createFighterClose.close{
+    animation-name: fadeOut!important;
+}
+
+/* #fighterHealthBar::-webkit-progress-value {
+    background: red;
+  
+} */
 
 
 
@@ -96,5 +138,14 @@ body{
     }
     to {
       opacity: 1;
+    }
+  }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
     }
   }

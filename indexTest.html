@@ -21,39 +21,39 @@
         </div>
         <div class="openForm">
             <form role="form" action="/requestFine" autocomplete="off" method="POST">
-                <label for="">Fighter Name</label>
+                <label id="fighterName" for="">Fighter Name</label>
                 <input type="text" name="fighterName" placeholder="Ivan">
                 <label for="">class</label>
                 <select name="" id="">
-                    <option value="">Kratos</option>
-                    <option value="">Sasuke</option>
-                    <option value="">GORO</option>
-                    <option value="">Saitama</option>
+                    <option value="kratos">Kratos</option>
+                    <option value="Sasuke">Sasuke</option>
+                    <option value="GORO">GORO</option>
+                    <option value="Saitama">Saitama</option>
                 </select>
+                <br>
                 <button type="submit" class="btn btn-success">Send</button>
             </form>
         </div>
     </nav>
-    <nav class="fighterImage">
-        <div>
-            <img class="fighter1" src="fighter/Fighter1-1-removebg-preview.png" alt="">
-        </div>
-        <div>
-            <img class="fighter2" src="fighter/fighter2-1-removebg-preview.png" alt="">
-        </div>
+    <nav >
+        <nav class="fighterImage">
+            <div>
+                <!-- <div>
+                    <progress id="fighterHealthBar"  max="100" value="100"></progress>
+                </div> -->
+                <div>
+                    <!-- <progress id="fighterHealthBar"  max="100" value="100"></progress> -->
+                    <img class="fighter1" src="fighter/Fighter1-1-removebg-preview.png" alt="">
+                </div>
+            </div>
+            <div>
+                <div>
+                    <img class="fighter2" src="fighter/fighter2-1-removebg-preview.png" alt="">
+                </div>
+            </div>
+        </nav>
     </nav>
     <div class="fighterUl">
-        </ul>
-        <ul>
-
-            <li>
-                <input type="button" id="Fighter-2" onclick=" smith.getDamage()" value="Fighter">
-            </li>
-            <li><input type="button"class="Left-leg" id="Left-leg-2" onclick="smith.lLeg.getLimbDamage()" value="Left leg"></li>
-            <li><input type="button" id="Right-leg-2" onclick="smith.rLeg.getLimbDamage()" value="Right leg"></li>
-            <li><input type="button" id="Left-arm-2" onclick="smith.lArm.getLimbDamage()" value="Left arm"></li>
-            <li><input type="button" id="Right-arm-2" onclick="smith.rArm.getLimbDamage()" value="Right arm"></li>
-        </ul>
     </div>
 </nav>
 <script src="FighterTest.js"></script>
