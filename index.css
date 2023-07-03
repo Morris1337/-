@@ -1,3 +1,35 @@
+@media only screen and (min-width: 960px) and (max-width: 9999px){
+    /* .limbsButtons{
+        margin-top: -570px;
+    } */
+    #fighterHealthBar{
+        width: 220px;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 959px){
+    /* .limbsButtons{
+        margin-top: -270px;
+    } */
+    #fighterHealthBar{
+        width: 170px;
+    }
+}
+
+@media only screen and (min-width: 376px) and (max-width: 767px){
+
+    #fighterHealthBar{
+        width: 120px;
+    }
+}
+
+@media only screen and (min-width: 0px) and (max-width: 375px){
+    #fighterHealthBar{
+        width: 70px;
+    }
+}
+
+
 header{
     height: 50px;
     background-color: #360101;
@@ -8,7 +40,7 @@ body{
     background-size: cover;
     margin: 0;
     background-repeat: no-repeat;
-    height: 100vh;
+    height: 115vh;
 }
 
 .imageSize{
@@ -36,19 +68,43 @@ body{
     justify-content:baseline 
 }
 
+.limbsButtons{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    /* left: 50%; */
+    top: 50%;
+    transform: translate(20%, -50%);
+    gap: 5px;
+    animation-name: fadeIn;
+}
+
+.limbsButtons.open{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
 #fighterHealthBar{
     position: relative;
     border-radius: 4px;
     background: green;
     transform-origin: center;
-    zoom: 1;
+    position: relative;
+    top: 37px;
+    left: -20px;
 }
 
 #fighterHealthBar::-webkit-progress-bar {
-    background: #360101;
+    background: #8a0404;
   
 }
 
+.flexCenter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 
 .fighter1{
@@ -94,6 +150,9 @@ body{
     padding: 10px;
     line-height: 26px;
     border-radius: 1px;
+    background-color: rgba(128, 128, 128, 0.7);
+    left: 37%;
+    top: 31%;
     display: none;
     animation-duration: 1.5s;
     animation-fill-mode: both;
@@ -109,7 +168,7 @@ body{
 }
 
 
-#createFighterClose{
+/* #createFighterClose{
     display: none;
     margin-left: 20px;
     animation-duration: 1.5s;
@@ -123,13 +182,27 @@ body{
 
 #createFighterClose.close{
     animation-name: fadeOut!important;
-}
-
-/* #fighterHealthBar::-webkit-progress-value {
-    background: red;
-  
 } */
 
+.testCreate{
+    display: none;
+    margin-left: 20px;
+    animation-duration: 1.5s;
+    animation-fill-mode: both;
+    animation-name: fadeIn;
+}
+
+.testCreate.open{
+    display: block;
+}
+
+.testCreate.close{
+    animation-name: fadeOut!important;
+}
+
+/* .testButton{
+    animation-name: fadeIn;
+} */
 
 
 @keyframes fadeIn {

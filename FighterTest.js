@@ -1,16 +1,18 @@
 // const charKratos = document.querySelectorAll("option.Kratos")
 
 
-const fighterConteiner = document.querySelector(".fighterUl")
-const createFighter = document.querySelector("#createFighter")
-const formCreateFighter = document.querySelector(".openForm")
-const formCreateFighterClose = document.querySelector("#createFighterClose")
-const healthValue = document.querySelector("#fighterHealthBar")
-const submit = document.querySelector("#submit")
+const fighterConteiner = document.querySelector(".fighterUl") //Кнопки умений персонажа
+const createFighterBtn = document.querySelector("#createFighter")//Кнопка открыть форму для создания персонажа
+const formCreateFighter = document.querySelector(".openForm") //Форма для создания персонажа
+const formCreateFighterClose = document.querySelector("#createFighterClose") //Кнопка закрыть форму для создания персонажа
+const healthValue = document.querySelector("#fighterHealthBar") //Панель здоровья персонажа
+const submit = document.querySelector("#submit") //Кнопка для отправления формы на сервер
+const btnTest = document.querySelector(".testCreate") //Контейнер в котором лежат кнопки для закрытия формы и тестова кнопка
+const testButton = document.querySelector("#testButton") //Тестовая кнопка для вызова кнопок умений
 
 const limbs = [
-    { limbName: "Head", limbHealth: 10, gettingDamage: 5},
-    { limbName: "Body", limbHealth: 50, gettingDamage: 10},  
+    { limbName: "Head", limbHealth: 10, gettingDamage: 5}, //добавил голову
+    { limbName: "Body", limbHealth: 50, gettingDamage: 10},  //добавил туловеще
     { limbName: "Right Arm", limbHealth: 10, gettingDamage: 5 },
     { limbName: "Left Arm", limbHealth: 10, gettingDamage: 5 },
     { limbName: "Right Leg", limbHealth: 10, gettingDamage: 3 },
@@ -26,20 +28,23 @@ const limbs = [
 
 const fighterHealth = 100
 
-createFighter.addEventListener("click", ()=>{
+createFighterBtn.addEventListener("click", ()=>{
     formCreateFighter.classList.add("open")
     formCreateFighterClose.classList.add("open")
-})
+    btnTest.classList.add("open")
+})//Открываем форму
 
 formCreateFighterClose.addEventListener("click", ()=>{
     formCreateFighter.classList.add("close")
     formCreateFighterClose.classList.add("close")
-})
+    btnTest.classList.add("close")
+})//закрываем форму
 
-submit.addEventListener("click", ()=>{
-    if()
-} )
+// testButton.addEventListener("click", ()=>{
+//     Fighter.createFighter()
+// }) 
 
+//По нажатию должны создать кнопки умений 
 
 
 
@@ -55,7 +60,7 @@ submit.addEventListener("click", ()=>{
 
 class Fighter {
     constructor(fighterName, fighterHealth, limbs) {
-        this.name = document.querySelector("#fighterName");
+        this.name = document.querySelector("#fighterName").value;
         this.health = fighterHealth;
         this.isDefeat = false;
         this.limbs = limbs.map(limb => new Limb(limb) )
@@ -75,7 +80,7 @@ class Fighter {
     
     getDamage(damage) {
         if (!this.isDefeat) {
-            this.health -= damage;
+            this.health -= damage; //убрал рандомный урон для всего корпуса
             if (this.health > 0) {
                 console.log(`У бойца ${this.name} осталось ${this.health} единиц здоровья`);
             } else {
@@ -90,6 +95,7 @@ class Fighter {
     createFighter(){
         const div = document.createElement("div")
         this.limbs.forEach(limb =>{
+            div.classList.add("limbsButtons")
             const button = document.createElement("button")
             const progress = document.createElement("progress")
 
@@ -97,34 +103,39 @@ class Fighter {
             button.textContent = limb.name
             button.addEventListener("click", ()=>{
                 limb.getLimbDamage()
-                switch (true) {
-                    case (fighterHealth <= 100):
-                      button.style.background = "green";
-                      break;
-                    case (fighterHealth <= 80):
-                      button.style.background = "-webkit-linear-gradient(top, green, yellow)";
-                      break;
-                    case (fighterHealth <= 60):
-                      button.style.background = "yellow";
-                      break;
-                    case (fighterHealth <= 40):
-                      button.style.background = "-webkit-linear-gradient(top, yellow, red)";
-                      break;
-                    case (fighterHealth <= 20):
-                      button.style.background = "red";
-                      break;
-                    case (fighterHealth <= 0):
-                      button.setAttribute("disabled", "");
-                      break;
-                }
+                // switch (true) {
+                //     case (fighterHealth <= 100):
+                //       button.style.background = "green";
+                //       break;
+                //     case (fighterHealth <= 80):
+                //       button.style.background = "-webkit-linear-gradient(top, green, yellow)";
+                //       break;
+                //     case (fighterHealth <= 60):
+                //       button.style.background = "yellow";
+                //       break;
+                //     case (fighterHealth <= 40):
+                //       button.style.background = "-webkit-linear-gradient(top, yellow, red)";
+                //       break;
+                //     case (fighterHealth <= 20):
+                //       button.style.background = "red";
+                //       break;
+                //     case (fighterHealth <= 0):
+                //       button.setAttribute("disabled", "");
+                //       break;
+                // }
+                // пытался спомощью switch изменять кнопки
+                healthValue.value = this.health //вывод урона на панель progress
             })
             div.appendChild(button)
         })
         fighterConteiner.appendChild(div)
-    }
 
-    
+    }   
 }
+testButton.addEventListener("click", () => {
+    createFighter(); // с помощью кнопки вызывать метод в котором создаються кнопки для персонажа
+  })
+
 
 class Limb {
     constructor({ limbName, limbHealth, gettingDamage }) {
@@ -144,19 +155,12 @@ class Limb {
             } else {
                 this.isBroken = true;
             }
-            fighter.getDamage(this.gettingDamage)
+            fighter.getDamage(this.gettingDamage) //Обьеденил общий урон и урон который проходит по конечностям
         }
     }
 }
 
 
-
-
-// submitForm.addEventListener("click", ()=>{
-//     formCreateFighter.classList.add("open")
-//     formCreateFighterClose.classList.add("open")
-//     console.log(submitForm)
-// })
 
 
 let fighter = new Fighter("fighterName", fighterHealth, limbs);
@@ -168,103 +172,3 @@ const rightLeg1 = document.querySelector("#Right-leg-1", ".button")
 const leftArm1 = document.querySelector("#Left-arm-1", ".button")
 const rightArm1 = document.querySelector("#Right-arm-1", ".button")
 
-
-// fighter1.addEventListener("click", function(){
-//     neo.getDamage()
-//     if(neo.health <= 100)
-//     fighter1.style.background =  "green"
-//     if(neo.health <= 80)
-//     fighter1.style.background =  ("-webkit-linear-gradient(top, green, yellow)")
-//     if(neo.health <= 60)
-//     fighter1.style.background = "yellow"
-//     if(neo.health <= 40)
-//     fighter1.style.background =  ("-webkit-linear-gradient(top, yellow, red)")
-//     if(neo.health <= 20)
-//     fighter1.style.background = "red"
-//     if(neo.health <= 0)
-//     fighter1.setAttribute("disabled", "")
-// })
-
-
-// leftLeg1.addEventListener("click", function(){
-//     neo.lLeg.getLimbDamage()
-//     if(neo.lLeg.health <= 20)
-//     leftLeg1.style.background = "green"
-//     if(neo.lLeg.health <= 13)
-//     leftLeg1.style.background = "yellow"
-//     if(neo.lLeg.health <= 7)
-//     leftLeg1.style.background = "red"
-//     if(neo.lLeg.health <= 0)
-//     leftLeg1.setAttribute("disabled", "")
-
-// })
-
-
-// leftLeg1.addEventListener("click", function(){
-//     neo.lLeg.getLimbDamage()
-//     if(neo.lLeg.health <= 20)
-//     leftLeg1.style.background = "green"
-//     if(neo.lLeg.health <= 13)
-//     leftLeg1.style.background = "yellow"
-//     if(neo.lLeg.health <= 7)
-//     leftLeg1.style.background = "red"
-//     if(neo.lLeg.health <= 0)
-//     leftLeg1.setAttribute("disabled", "")
-
-// })
-
-// buttons.forEach(button => {
-//     button.addEventListener("click", function(){
-//         neo.limbHealth.getLimbDamage()
-//         if(limbs.limbHealth <= 20)
-//         button.style.background = "green"
-//         if(limbs.limbHealth.health <= 13)
-//         button.style.background = "yellow"
-//         if(limbs.limbHealth.health <= 7)
-//         button.style.background = "red"
-//         if(limbs.limbHealth.health <= 0)
-//         button.setAttribute("disabled", "")
-
-// })})
-
-    // rightLeg1.addEventListener("click", function(){
-    // neo.rLeg.getLimbDamage()
-    // if(neo.rLeg.health <= 20)
-    //     rightLeg1.style.background = "green"
-    // if(neo.rLeg.health <= 13)
-    //     rightLeg1.style.background = "yellow"
-    // if(neo.rLeg.health <= 7)
-    //     rightLeg1.style.background = "red"
-    // if(neo.rLeg.health <= 0)
-    //     rightLeg1.setAttribute("disabled", "")
-        
-    // }
-    // )
-
-    // leftArm1.addEventListener("click", function(){
-    //     neo.lArm.getLimbDamage()
-    //     if(neo.lArm.health <= 20)
-    //     leftArm1.style.background = "green"
-    //     if(neo.lArm.health <= 13)
-    //     leftArm1.style.background = "yellow"
-    //     if(neo.lArm.health <= 7)
-    //     leftArm1.style.background = "red"
-    //     if(neo.lArm.health <= 0)
-    //     leftArm1.setAttribute("disabled", "")
-        
-    // }
-    // )
-
-    // rightArm1.addEventListener("click", function(){
-    //     neo.rArm.getLimbDamage()
-    //     if(neo.rArm.health <= 20)
-    //     rightArm1.style.background = "green"
-    //     if(neo.rArm.health <= 13)
-    //     rightArm1.style.background = "yellow"
-    //     if(neo.rArm.health <= 7)
-    //     rightArm1.style.background = "red"
-    //     if(neo.rArm.health <= 0)
-    //     rightArm1.setAttribute("disabled", "")
-        
-    // }
-    // )

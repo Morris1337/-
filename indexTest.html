@@ -10,7 +10,10 @@
     <nav>
         <div class="header-create-fighter">
             <button id="createFighter" class="btn-new">Create fighter</button>
-            <button id="createFighterClose" class="btn-new">close</button>
+            <div class="testCreate">
+                <button id="createFighterClose" class="btn-new">close</button>
+                <button id="testButton" class="btn-new">test</button>
+            </div>
         </div>
     </nav>
 </header>
@@ -20,9 +23,9 @@
         <div>
         </div>
         <div class="openForm">
-            <form role="form" action="/requestFine" autocomplete="off" method="POST">
-                <label id="fighterName" for="">Fighter Name</label>
-                <input type="text" name="fighterName" placeholder="Ivan">
+            <form id="myForm" role="form" action="/requestFine" autocomplete="off" method="POST">
+                <label for="">Fighter Name</label>
+                <input id="fighterName" type="text" name="fighterName" placeholder="Ivan">
                 <label for="">class</label>
                 <select name="" id="">
                     <option value="kratos">Kratos</option>
@@ -38,9 +41,9 @@
     <nav >
         <nav class="fighterImage">
             <div>
-                <!-- <div>
+                <div class="flexCenter">
                     <progress id="fighterHealthBar"  max="100" value="100"></progress>
-                </div> -->
+                </div>
                 <div>
                     <!-- <progress id="fighterHealthBar"  max="100" value="100"></progress> -->
                     <img class="fighter1" src="fighter/Fighter1-1-removebg-preview.png" alt="">
