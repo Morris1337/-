@@ -132,21 +132,26 @@ class Fighter {
         const selectedCharacter = selectElement.value
         if(selectedCharacter === "kratos"){
           const img = document.createElement("img")
+          img.classList.add("fighter1")
           img.src = "fighter/21425_kratos-removebg-preview.png";
           div.appendChild(img)
       }else if(selectedCharacter === "Sasuke"){
           const img = document.createElement("img")
+          img.classList.add("fighter1")
           img.src = "fighter/fighter2-1-removebg-preview.png"
           div.appendChild(img)
       }else if(selectedCharacter === "GORO"){
           const img = document.createElement("img")
+          img.classList.add("fighter1")
           img.src = "fighter/4083864-9971075880-Princ-removebg-preview.png"
           div.appendChild(img)
       }else if(selectedCharacter === "Saitama"){
           const img = document.createElement("img")
+          img.classList.add("fighter1")
           img.src = "fighter/png-clipart-clark-kent-goku-one-punch-man-saitama-anime-one-punch-s-comics-superhero-removebg-preview.png"
           div.appendChild(img);
       }
+      
       
       fighterImage.appendChild(div)
     }

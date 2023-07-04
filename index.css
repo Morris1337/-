@@ -51,7 +51,6 @@ body{
 }
 
 .background{
-    z-index: 2;
     background-image: url(background/Mortal-Kombat-11-tile-image.jpg);
     height: 46vw;
     background-size: cover;
@@ -63,7 +62,7 @@ body{
     display: grid;
     justify-content: center; 
     grid-template-columns: repeat(2, 37%); 
-    justify-content: space-between
+    justify-content: space-between;
 }
 
 .fighterUl{
@@ -110,7 +109,7 @@ body{
 
 
 .fighter1{
-    width: 100%;
+    width: 250%;
     height: auto;
     background-size: cover;
     background-repeat: no-repeat;
@@ -209,7 +208,6 @@ body{
 /* .testButton{
     animation-name: fadeIn;
 } */
-
 
 @keyframes fadeIn {
     from {
