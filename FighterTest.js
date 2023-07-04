@@ -2,6 +2,7 @@
 
 
 const fighterConteiner = document.querySelector(".fighterUl") //Кнопки умений персонажа
+const fighterImage = document.querySelector(".fighterImage")// место где создаеться картинка бойца
 const createFighterBtn = document.querySelector("#createFighter")//Кнопка открыть форму для создания персонажа
 const formCreateFighter = document.querySelector(".openForm") //Форма для создания персонажа
 const formCreateFighterClose = document.querySelector("#createFighterClose") //Кнопка закрыть форму для создания персонажа
@@ -29,12 +30,18 @@ const limbs = [
 const fighterHealth = 100
 
 createFighterBtn.addEventListener("click", ()=>{
+    formCreateFighter.classList.remove("close")
+    formCreateFighterClose.classList.remove("close")
+    btnTest.classList.remove("close")
     formCreateFighter.classList.add("open")
     formCreateFighterClose.classList.add("open")
     btnTest.classList.add("open")
 })//Открываем форму
 
 formCreateFighterClose.addEventListener("click", ()=>{
+    formCreateFighter.classList.remove("open")
+    formCreateFighterClose.classList.remove("open")
+    btnTest.classList.remove("open")
     formCreateFighter.classList.add("close")
     formCreateFighterClose.classList.add("close")
     btnTest.classList.add("close")
@@ -60,22 +67,10 @@ formCreateFighterClose.addEventListener("click", ()=>{
 
 class Fighter {
     constructor(fighterName, fighterHealth, limbs) {
-        this.name = document.querySelector("#fighterName").value;
+        this.name = fighterName
         this.health = fighterHealth;
         this.isDefeat = false;
         this.limbs = limbs.map(limb => new Limb(limb) )
-        // this.getDamage = this.getDamage.bind(this);
-        
-        
-        // for (let i = 0; i < limbs.length; i++) {
-        //     const limbName = limbs[i].limbName
-        //     this[limbName] = new Limb(limbs[i]);
-        //     const getLimbDamage = this[limbName].getLimbDamage.bind(this[limbName])
-        //     this[limbName].getLimbDamage = () => {
-        //         getLimbDamage()
-        //         this.getDamage();
-        //     }
-        // }
     }
     
     getDamage(damage) {
@@ -94,35 +89,34 @@ class Fighter {
 
     createFighter(){
         const div = document.createElement("div")
-        this.limbs.forEach(limb =>{
-            div.classList.add("limbsButtons")
-            const button = document.createElement("button")
-            const progress = document.createElement("progress")
+        div.classList.add("limbsButtons")
+        const fighterName = document.createElement("h2")
+        fighterName.textContent = this.name
+        div.appendChild(fighterName)
 
-            progress
+        this.limbs.forEach(limb =>{
+            const button = document.createElement("button")
             button.textContent = limb.name
             button.addEventListener("click", ()=>{
+                console.log(fighterName.textContent)
                 limb.getLimbDamage()
-                // switch (true) {
-                //     case (fighterHealth <= 100):
-                //       button.style.background = "green";
-                //       break;
-                //     case (fighterHealth <= 80):
-                //       button.style.background = "-webkit-linear-gradient(top, green, yellow)";
-                //       break;
-                //     case (fighterHealth <= 60):
-                //       button.style.background = "yellow";
-                //       break;
-                //     case (fighterHealth <= 40):
-                //       button.style.background = "-webkit-linear-gradient(top, yellow, red)";
-                //       break;
-                //     case (fighterHealth <= 20):
-                //       button.style.background = "red";
-                //       break;
-                //     case (fighterHealth <= 0):
-                //       button.setAttribute("disabled", "");
-                //       break;
-                // }
+                switch (true) {
+                    case (getPercent(limb.fullHealth, limb.health) >= 75):
+                      button.style.backgroundColor = "green";
+                      break;
+                    case (getPercent(limb.fullHealth, limb.health) >= 50):
+                      button.style.backgroundColor = "-webkit-linear-gradient(top, green, yellow)";
+                      break;
+                    case (getPercent(limb.fullHealth, limb.health) >= 25):
+                      button.style.backgroundColor = "yellow";
+                      break;
+                    case (getPercent(limb.fullHealth, limb.health) >= 10):
+                      button.style.backgroundColor = "red";
+                      break;
+                    case (getPercent(limb.fullHealth, limb.health) <= 0):
+                      button.setAttribute("disabled", "");
+                      break;
+                }
                 // пытался спомощью switch изменять кнопки
                 healthValue.value = this.health //вывод урона на панель progress
             })
@@ -131,10 +125,41 @@ class Fighter {
         fighterConteiner.appendChild(div)
 
     }   
+    createFighterImg(){
+      const selectElement = document.querySelector("#char")
+      const div = document.createElement("div")
+      div.classList.add("fighterImage")
+        const selectedCharacter = selectElement.value
+        if(selectedCharacter === "kratos"){
+          const img = document.createElement("img")
+          img.src = "fighter/21425_kratos-removebg-preview.png";
+          div.appendChild(img)
+      }else if(selectedCharacter === "Sasuke"){
+          const img = document.createElement("img")
+          img.src = "fighter/fighter2-1-removebg-preview.png"
+          div.appendChild(img)
+      }else if(selectedCharacter === "GORO"){
+          const img = document.createElement("img")
+          img.src = "fighter/4083864-9971075880-Princ-removebg-preview.png"
+          div.appendChild(img)
+      }else if(selectedCharacter === "Saitama"){
+          const img = document.createElement("img")
+          img.src = "fighter/png-clipart-clark-kent-goku-one-punch-man-saitama-anime-one-punch-s-comics-superhero-removebg-preview.png"
+          div.appendChild(img);
+      }
+      
+      fighterImage.appendChild(div)
+    }
 }
+
+
+
+
 testButton.addEventListener("click", () => {
-    createFighter(); // с помощью кнопки вызывать метод в котором создаються кнопки для персонажа
-  })
+  let fighter = new Fighter(document.querySelector("#fighterName").value, fighterHealth, limbs);
+  fighter.createFighter();
+  fighter.createFighterImg()
+});
 
 
 class Limb {
@@ -142,7 +167,7 @@ class Limb {
         this.name = limbName;
         this.health = limbHealth;
         this.gettingDamage = gettingDamage
-
+        this.fullHealth = limbHealth;
         this.isBroken = false;
     }
     
@@ -163,8 +188,6 @@ class Limb {
 
 
 
-let fighter = new Fighter("fighterName", fighterHealth, limbs);
-fighter.createFighter()
 const smith = new Fighter("Smith", fighterHealth, limbs);
 const fighter1 = document.querySelector("#Fighter-1", ".button")
 const leftLeg1 = document.querySelector("#Left-leg-1", ".button")
@@ -172,3 +195,6 @@ const rightLeg1 = document.querySelector("#Right-leg-1", ".button")
 const leftArm1 = document.querySelector("#Left-arm-1", ".button")
 const rightArm1 = document.querySelector("#Right-arm-1", ".button")
 
+function getPercent(fullNumber, chapterNumber) {
+    return fullNumber * (chapterNumber / 100) * 100
+}

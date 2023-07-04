@@ -36,6 +36,7 @@ header{
 }
 
 body{
+    position: relative;
     background: -webkit-linear-gradient(top, #000000, #6d0404);
     background-size: cover;
     margin: 0;
@@ -50,6 +51,7 @@ body{
 }
 
 .background{
+    z-index: 2;
     background-image: url(background/Mortal-Kombat-11-tile-image.jpg);
     height: 46vw;
     background-size: cover;
@@ -61,20 +63,20 @@ body{
     display: grid;
     justify-content: center; 
     grid-template-columns: repeat(2, 37%); 
+    justify-content: space-between
 }
 
 .fighterUl{
     display: flex;
-    justify-content:baseline 
+    justify-content: space-around
 }
 
 .limbsButtons{
     display: flex;
     flex-direction: column;
-    position: absolute;
     /* left: 50%; */
-    top: 50%;
-    transform: translate(20%, -50%);
+    /* top: 50%;
+    transform: translate(20%, -50%); */
     gap: 5px;
     animation-name: fadeIn;
 }
@@ -157,13 +159,17 @@ body{
     animation-duration: 1.5s;
     animation-fill-mode: both;
     animation-name: fadeIn;
+    /* z-index: 1; */
 }
 
 .openForm.open{
+    /* z-index: 3; */
     display: flex;
 }
 
 .openForm.close{
+    /* z-index: 1; */
+    display: flex;
     animation-name: fadeOut;
 }
 
