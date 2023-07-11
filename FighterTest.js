@@ -11,6 +11,11 @@ const submit = document.querySelector("#submit") //Кнопка для отпр�
 const btnTest = document.querySelector(".testCreate") //Контейнер в котором лежат кнопки для закрытия формы и тестова кнопка
 const testButton = document.querySelector("#testButton") //Тестовая кнопка для вызова кнопок умений
 
+const gameChat = document.querySelector("#chat")
+const chatInput = document.querySelector("#chatInput")
+const chatButton = document.querySelector("#chatButton")
+
+
 const limbs = [
     { limbName: "Head", limbHealth: 10, gettingDamage: 5}, //добавил голову
     { limbName: "Body", limbHealth: 50, gettingDamage: 10},  //добавил туловеще
@@ -181,7 +186,10 @@ class Limb {
             this.gettingDamage = Math.floor(Math.random() * 3) + 1;
             this.health -= this.gettingDamage;
             if (this.health > 0) {
-                console.log(`У конечности ${this.name} осталось ${this.health} единиц здоровья`);
+                const chatText = document.createElement("p")
+                chatText.classList.add("chatText")
+                chatText.textContent = `У конечности ${this.name} осталось ${this.health} единиц здоровья`;
+                gameChat.appendChild(chatText)
             } else {
                 this.isBroken = true;
             }
@@ -189,6 +197,15 @@ class Limb {
         }
     }
 }
+
+
+chatButton.addEventListener("click", sendMessage)
+chatInput.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        sendMessage();
+    }
+    });
+
 
 
 

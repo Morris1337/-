@@ -41,7 +41,7 @@ body{
     background-size: cover;
     margin: 0;
     background-repeat: no-repeat;
-    height: 115vh;
+    height: 150vh;
 }
 
 .imageSize{
@@ -208,6 +208,27 @@ body{
 /* .testButton{
     animation-name: fadeIn;
 } */
+
+#chat{
+    align-items: center;
+    background-color: #eee;
+    width: 400px;
+    height: 300px;
+    border-radius: 40px;
+    margin: auto;
+    margin-top: 20px;
+    overflow: auto;
+}
+
+#textDiv{
+display: flex;
+justify-content: center;
+margin-top: 10px;
+}
+
+.chatText{
+    margin-left: 20px;
+}
 
 @keyframes fadeIn {
     from {
