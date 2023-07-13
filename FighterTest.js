@@ -15,6 +15,13 @@ const gameChat = document.querySelector("#chat")
 const chatInput = document.querySelector("#chatInput")
 const chatButton = document.querySelector("#chatButton")
 
+const saveData = localStorage.getItem("fighting")
+if(saveData){
+    const fightingData = JSON.parse(saveData);
+    createFighterImg(fightingData)
+    createFighter(fightingData)
+    
+}
 
 const limbs = [
     { limbName: "Head", limbHealth: 10, gettingDamage: 5}, //добавил голову
@@ -105,6 +112,7 @@ class Fighter {
             button.addEventListener("click", ()=>{
                 console.log(fighterName.textContent)
                 limb.getLimbDamage()
+                localStorage.setItem("fightingData", JSON.stringify(fightingData))
                 switch (true) {
                     case (getPercent(limb.fullHealth, limb.health) >= 75):
                       button.style.backgroundColor = "green";
@@ -199,12 +207,12 @@ class Limb {
 }
 
 
-chatButton.addEventListener("click", sendMessage)
-chatInput.addEventListener('keydown', function(event) {
-    if (event.key === 'Enter') {
-        sendMessage();
-    }
-    });
+// chatButton.addEventListener("click", sendMessage)
+// chatInput.addEventListener('keydown', function(event) {
+//     if (event.key === 'Enter') {
+//         sendMessage();
+//     }
+//     });
 
 
 
