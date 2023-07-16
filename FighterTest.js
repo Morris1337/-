@@ -15,13 +15,53 @@ const gameChat = document.querySelector("#chat")
 const chatInput = document.querySelector("#chatInput")
 const chatButton = document.querySelector("#chatButton")
 
-const saveData = localStorage.getItem("fighting")
-if(saveData){
-    const fightingData = JSON.parse(saveData);
-    createFighterImg(fightingData)
-    createFighter(fightingData)
+function pageLoad(){ //функция обработки данных для чата
+let outputChat = gameChat 
+let inputMessage = chatInput.value
+let sendButton = chatButton
+
+sendButton.addEventListener("click", sendRequest) 
+
+    function sendRequest(){ //проверка на правильный запрос(валидация)
+        if(validateInput()){
+            let xhr = new XMLHttpRequest();
+            xhr.open("GET", `indexTest.html`)
+            xhr.onerror = function(){
+                outputChat.textContent = "Произошла ошибка"
+            }
+            xhr.onload = function(){
+                if(xhr.status === 200){
+                    let textResponse = xhr.responseText
+                    console.log(textResponse);
+                    outputChat.textContent += textResponse + "\n";
+                
+                }
+            }
+            xhr.send();
+        }else{
+            outputChat.textContent = "Введите текс"
+        }
+    }   
     
+    function validateInput(){
+        let validated = true;
+        if(inputMessage.value === "" || isNaN(inputMessage)){// проверка что бы инпут небыл пустым
+            validated = false; // показывает что инпут не прошел валидацию
+            return false;
+        } 
+        return true;
+    }
 }
+
+// const saveData = localStorage.getItem("fighting")
+// if(saveData){
+//     const fightingData = JSON.parse(saveData);
+//     createFighterImg(fightingData)
+//     createFighter(fightingData)
+    
+// }
+
+
 
 const limbs = [
     { limbName: "Head", limbHealth: 10, gettingDamage: 5}, //добавил голову
@@ -88,12 +128,15 @@ class Fighter {
     getDamage(damage) {
         if (!this.isDefeat) {
             this.health -= damage; //убрал рандомный урон для всего корпуса
+            const chatText = document.createElement("p")
+            chatText.classList.add("chatText")
             if (this.health > 0) {
-                console.log(`У бойца ${this.name} осталось ${this.health} единиц здоровья`);
+                chatText.textContent = `У бойца ${this.name} осталось ${this.health} единиц здоровья`;
             } else {
                 this.isDefeat = true;
-                console.log(`Боец ${this.name} повержен`);
+                chatText.textContent = `Боец ${this.name} повержен`;
             }
+            gameChat.appendChild(chatText)
         }
     }
 
@@ -112,7 +155,6 @@ class Fighter {
             button.addEventListener("click", ()=>{
                 console.log(fighterName.textContent)
                 limb.getLimbDamage()
-                localStorage.setItem("fightingData", JSON.stringify(fightingData))
                 switch (true) {
                     case (getPercent(limb.fullHealth, limb.health) >= 75):
                       button.style.backgroundColor = "green";
@@ -174,7 +216,7 @@ class Fighter {
 
 
 testButton.addEventListener("click", () => {
-  let fighter = new Fighter(document.querySelector("#fighterName").value, fighterHealth, limbs);
+    let fighter = new Fighter(document.querySelector("#fighterName").value, fighterHealth, limbs);
   fighter.createFighter();
   fighter.createFighterImg()
 });
@@ -215,9 +257,9 @@ class Limb {
 //     });
 
 
+document.addEventListener("DOMContentLoaded", pageLoad)
 
-
-
+// let fighter = new Fighter(document.querySelector("#fighterName").value, fighterHealth, limbs);
 const smith = new Fighter("Smith", fighterHealth, limbs);
 const fighter1 = document.querySelector("#Fighter-1", ".button")
 const leftLeg1 = document.querySelector("#Left-leg-1", ".button")
