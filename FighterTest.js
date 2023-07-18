@@ -270,3 +270,6 @@ const rightArm1 = document.querySelector("#Right-arm-1", ".button")
 function getPercent(fullNumber, chapterNumber) {
     return fullNumber * (chapterNumber / 100) * 100
 }
+
+let moveLimbsButtons = document.querySelector(".limbsButtons")
+
