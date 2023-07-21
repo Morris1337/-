@@ -6,60 +6,16 @@ const fighterImage = document.querySelector(".fighterImage")// место где
 const createFighterBtn = document.querySelector("#createFighter")//Кнопка открыть форму для создания персонажа
 const formCreateFighter = document.querySelector(".openForm") //Форма для создания персонажа
 const formCreateFighterClose = document.querySelector("#createFighterClose") //Кнопка закрыть форму для создания персонажа
-const healthValue = document.querySelector("#fighterHealthBar") //Панель здоровья персонажа
 const submit = document.querySelector("#submit") //Кнопка для отправления формы на сервер
 const btnTest = document.querySelector(".testCreate") //Контейнер в котором лежат кнопки для закрытия формы и тестова кнопка
 const testButton = document.querySelector("#testButton") //Тестовая кнопка для вызова кнопок умений
+const dragForm = document.querySelector("#dragForm")
+
 
 const gameChat = document.querySelector("#chat")
 const chatInput = document.querySelector("#chatInput")
 const chatButton = document.querySelector("#chatButton")
 
-function pageLoad(){ //функция обработки данных для чата
-let outputChat = gameChat 
-let inputMessage = chatInput.value
-let sendButton = chatButton
-
-sendButton.addEventListener("click", sendRequest) 
-
-    function sendRequest(){ //проверка на правильный запрос(валидация)
-        if(validateInput()){
-            let xhr = new XMLHttpRequest();
-            xhr.open("GET", `indexTest.html`)
-            xhr.onerror = function(){
-                outputChat.textContent = "Произошла ошибка"
-            }
-            xhr.onload = function(){
-                if(xhr.status === 200){
-                    let textResponse = xhr.responseText
-                    console.log(textResponse);
-                    outputChat.textContent += textResponse + "\n";
-                
-                }
-            }
-            xhr.send();
-        }else{
-            outputChat.textContent = "Введите текс"
-        }
-    }   
-    
-    function validateInput(){
-        let validated = true;
-        if(inputMessage.value === "" || isNaN(inputMessage)){// проверка что бы инпут небыл пустым
-            validated = false; // показывает что инпут не прошел валидацию
-            return false;
-        } 
-        return true;
-    }
-}
-
-// const saveData = localStorage.getItem("fighting")
-// if(saveData){
-//     const fightingData = JSON.parse(saveData);
-//     createFighterImg(fightingData)
-//     createFighter(fightingData)
-    
-// }
 
 
 
@@ -125,9 +81,9 @@ class Fighter {
         this.limbs = limbs.map(limb => new Limb(limb) )
     }
     
-    getDamage(damage) {
+    getDamage() {
         if (!this.isDefeat) {
-            this.health -= damage; //убрал рандомный урон для всего корпуса
+            this.health -= randomDmg(); //убрал рандомный урон для всего корпуса
             const chatText = document.createElement("p")
             chatText.classList.add("chatText")
             if (this.health > 0) {
@@ -139,8 +95,6 @@ class Fighter {
             gameChat.appendChild(chatText)
         }
     }
-
-
 
     createFighter(){
         const div = document.createElement("div")
@@ -155,6 +109,7 @@ class Fighter {
             button.addEventListener("click", ()=>{
                 console.log(fighterName.textContent)
                 limb.getLimbDamage()
+                this.getDamage(randomDmg())
                 switch (true) {
                     case (getPercent(limb.fullHealth, limb.health) >= 75):
                       button.style.backgroundColor = "green";
@@ -173,23 +128,25 @@ class Fighter {
                       break;
                 }
                 // пытался спомощью switch изменять кнопки
-                healthValue.value = this.health //вывод урона на панель progress
+                // healthValue.value = this.health //вывод урона на панель progress
+                
             })
             div.appendChild(button)
         })
-        fighterConteiner.appendChild(div)
+        fighterConteiner.appendChild(div)  
+
 
     }   
     createFighterImg(){
-      const selectElement = document.querySelector("#char")
-      const div = document.createElement("div")
-      div.classList.add("fighterImage")
-        const selectedCharacter = selectElement.value
-        if(selectedCharacter === "kratos"){
-          const img = document.createElement("img")
-          img.classList.add("fighter1")
-          img.src = "fighter/21425_kratos-removebg-preview.png";
-          div.appendChild(img)
+      const selectElement = document.querySelector("#char") // находим элемент со значениями(value) персонажей
+      const div = document.createElement("div") //создаем новый элемент
+      div.classList.add("fighterImage") //добовляем класс элементу и в css расписываем как далеко и как персонажи будут стоять
+        const selectedCharacter = selectElement.value // инициализируем значение. Приводим его к готовности использования
+        if(selectedCharacter === "kratos"){ //если мы в списке выбираем значение kratos
+          const img = document.createElement("img") //тогда создаеться новый элемент img
+          img.classList.add("fighter1") //этому элемента элементу даем класс 
+          img.src = "fighter/21425_kratos-removebg-preview.png"; //и вызываем фотографию
+          div.appendChild(img)//указываем что новый элемент дочерний ранее созданого элемента
       }else if(selectedCharacter === "Sasuke"){
           const img = document.createElement("img")
           img.classList.add("fighter1")
@@ -206,19 +163,31 @@ class Fighter {
           img.src = "fighter/png-clipart-clark-kent-goku-one-punch-man-saitama-anime-one-punch-s-comics-superhero-removebg-preview.png"
           div.appendChild(img);
       }
-      
-      
-      fighterImage.appendChild(div)
+      fighterImage.appendChild(div)//так же указываем что ранее созданый элемент дочерний элемента который мы нашли через document в нашем html, 
+    }
+
+    healthValue(){
+const healthBar = document.querySelector(".healthValue")
+        const healthValue = document.createElement("progress")
+        healthValue.max = 100
+        healthValue.value = this.health //вывод урона на панель progress
+        healthValue.classList.add("fighterHealthBar")
+        healthBar.appendChild(healthValue)
     }
 }
 
-
+let callCount = 0;
+const maxCalls = 2;
 
 
 testButton.addEventListener("click", () => {
     let fighter = new Fighter(document.querySelector("#fighterName").value, fighterHealth, limbs);
-  fighter.createFighter();
-  fighter.createFighterImg()
+    if(callCount < maxCalls){
+        callCount++;
+        fighter.createFighter()
+        fighter.createFighterImg()
+        fighter.healthValue()
+    };
 });
 
 
@@ -233,7 +202,7 @@ class Limb {
     
     getLimbDamage() {
         if (!this.isBroken) {
-            this.gettingDamage = Math.floor(Math.random() * 3) + 1;
+            this.gettingDamage = randomDmg();
             this.health -= this.gettingDamage;
             if (this.health > 0) {
                 const chatText = document.createElement("p")
@@ -243,21 +212,10 @@ class Limb {
             } else {
                 this.isBroken = true;
             }
-            fighter.getDamage(this.gettingDamage) //Обьеденил общий урон и урон который проходит по конечностям
         }
     }
 }
 
-
-// chatButton.addEventListener("click", sendMessage)
-// chatInput.addEventListener('keydown', function(event) {
-//     if (event.key === 'Enter') {
-//         sendMessage();
-//     }
-//     });
-
-
-document.addEventListener("DOMContentLoaded", pageLoad)
 
 // let fighter = new Fighter(document.querySelector("#fighterName").value, fighterHealth, limbs);
 const smith = new Fighter("Smith", fighterHealth, limbs);
@@ -271,5 +229,42 @@ function getPercent(fullNumber, chapterNumber) {
     return fullNumber * (chapterNumber / 100) * 100
 }
 
-let moveLimbsButtons = document.querySelector(".limbsButtons")
+function randomDmg(){
+    return Math.floor(Math.random() * 3) + 1;
+}
+
+formCreateFighter.ondragStart = () => false;
+
+
+const getCoords = (elem) => {
+    const box = elem.getBoundingClientRect();
+    return {
+        top: box.top + pageYOffset,
+        left: box.left + pageXOffset
+    };
+};
+
+formCreateFighter.addEventListener("mousedown", (e) => {
+    const coords = getCoords(formCreateFighter);
+    const shiftX = e.pageX - coords.left;
+    const shiftY = e.pageY - coords.top;
+
+    const moveAt = (e) => {
+        formCreateFighter.style.left = e.pageX - shiftX + "px";
+        formCreateFighter.style.top = e.pageY - shiftY + "px";
+    };
+
+    const theEnd = () => {
+        document.removeEventListener("mousemove", moveAt);
+        document.removeEventListener("mouseup", theEnd);
+    };
+
+    formCreateFighter.style.position = "absolute";
+
+    moveAt(e);
+    formCreateFighter.style.zIndex = 1000;
+
+    document.addEventListener("mousemove", moveAt);
+    document.addEventListener("mouseup", theEnd);
+});
 
