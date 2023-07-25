@@ -14,6 +14,20 @@
     #fighterHealthBar{
         width: 170px;
     }
+
+    .fighterUl{
+        display: grid!important;
+        margin-left: 50px!important;
+        flex-direction: row;
+        grid-template-columns: repeat(2, 10%)!important; 
+        justify-content: space-around!important;
+    }
+
+    .limbsButtons{
+        flex-direction: column!important;
+    }
+
+    
 }
 
 @media only screen and (min-width: 376px) and (max-width: 767px){
@@ -21,12 +35,38 @@
     #fighterHealthBar{
         width: 120px;
     }
+
+    .fighterUl{
+        display: grid!important;
+        margin-left: 50px!important;
+        flex-direction: row;
+        grid-template-columns: repeat(2, 10%)!important; 
+        justify-content: space-around!important;
+    }
+
+    .limbsButtons{
+        flex-direction: column!important;
+    }
+
 }
 
 @media only screen and (min-width: 0px) and (max-width: 375px){
     #fighterHealthBar{
         width: 70px;
     }
+
+    .fighterUl{
+        display: grid!important;
+        margin-left: 50px!important;
+        flex-direction: row;
+        grid-template-columns: repeat(2, 10%)!important; 
+        justify-content: space-around!important;
+    }
+
+    .limbsButtons{
+        flex-direction: column!important;
+    }
+
 }
 
 
@@ -66,23 +106,25 @@ body{
 }
 
 .fighterUl{
-    display: flex;
-    justify-content: space-around
+    display: grid;
+    margin-left: 50px;
+    grid-template-columns: repeat(2, 30%); 
+    justify-content: space-around;
 }
 
 .limbsButtons{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     /* left: 50%; */
     /* top: 50%;
     transform: translate(20%, -50%); */
     gap: 5px;
     animation-name: fadeIn;
+    margin-top: 100px;
 }
 
 .limbsButtons.open{
     display: flex;
-    flex-direction: column;
     gap: 5px;
     
 }
@@ -211,11 +253,13 @@ body{
 } */
 
 #chat{
+    display: flex;
+    flex-direction: column-reverse;
     align-items: center;
     background-color: #eee;
     width: 400px;
-    height: 300px;
-    border-radius: 40px;
+    height: 100px;
+    border-radius: 20px;
     margin: auto;
     margin-top: 20px;
     overflow: auto;
