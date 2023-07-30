@@ -6,18 +6,12 @@ const fighterImage = document.querySelector(".fighterImage")// место где
 const createFighterBtn = document.querySelector("#createFighter")//Кнопка открыть форму для создания персонажа
 const formCreateFighter = document.querySelector(".openForm") //Форма для создания персонажа
 const formCreateFighterClose = document.querySelector("#createFighterClose") //Кнопка закрыть форму для создания персонажа
-const submit = document.querySelector("#submit") //Кнопка для отправления формы на сервер
 const btnTest = document.querySelector(".testCreate") //Контейнер в котором лежат кнопки для закрытия формы и тестова кнопка
 const testButton = document.querySelector("#testButton") //Тестовая кнопка для вызова кнопок умений
-const dragForm = document.querySelector("#dragForm")
-
 
 const gameChat = document.querySelector("#chat")
 const chatInput = document.querySelector("#chatInput")
 const chatButton = document.querySelector("#chatButton")
-
-
-
 
 const limbs = [
     { limbName: "Head", limbHealth: 10, gettingDamage: 5}, //добавил голову
@@ -28,6 +22,7 @@ const limbs = [
     { limbName: "Left Leg", limbHealth: 10, gettingDamage: 3 },
 ];
 
+//TODO добавить оружие для бойца
 // const weapon = [
 //     {weaponName: "knife", weaponDamage: 5}
 //     {weaponName: "sword", weaponDamage: 10}
@@ -35,7 +30,9 @@ const limbs = [
 //     {weaponName: "axe", weaponDamage: 20}
 // ]
 
-const fighterHealth = 100
+
+
+const FIGHTER_HEALTH = 100;
 
 createFighterBtn.addEventListener("click", ()=>{
     formCreateFighter.classList.remove("close")
@@ -55,35 +52,20 @@ formCreateFighterClose.addEventListener("click", ()=>{
     btnTest.classList.add("close")
 })//закрываем форму
 
-// testButton.addEventListener("click", ()=>{
-//     Fighter.createFighter()
-// }) 
-
-//По нажатию должны создать кнопки умений 
-
-
-
-    // createFighter.addEventListener("click", ()=>{
-    //     const input = document.createElement("input")
-    //     input.name = "Fighter Name";
-    //     // input.addEventListener("input", (event)=>{
-    //     //     console.log(event)
-    //     // })
-    //     createFighter.appendChild(input)
-    // })
-
-
 class Fighter {
-    constructor(fighterName, fighterHealth, limbs) {
+    constructor(fighterName, FIGHTER_HEALTH, limbs) {
         this.name = fighterName
-        this.health = fighterHealth;
+        this.health = FIGHTER_HEALTH;
         this.isDefeat = false;
         this.limbs = limbs.map(limb => new Limb(limb) )
     }
     
     getDamage() {
         if (!this.isDefeat) {
-            this.health -= randomDmg(); //убрал рандомный урон для всего корпуса
+            const healthBar = document.getElementById(`${this.name}-healthBar`)//находим id который назначаем персонажам в переменной createHealthValue() через setAttribute
+            const damage = randomDmg()
+            this.health -= damage; //убрал рандомный урон для всего корпуса
+            healthBar.value -= damage;
             const chatText = document.createElement("p")
             chatText.classList.add("chatText")
             if (this.health > 0) {
@@ -96,12 +78,12 @@ class Fighter {
         }
     }
 
-    createFighter(){
-        const div = document.createElement("div")
-        div.classList.add("limbsButtons")
+    createFighterButtons(){
+        const buttonsContainer = document.createElement("div")
+        buttonsContainer.classList.add("limbsButtons")
         const fighterName = document.createElement("h2")
         fighterName.textContent = this.name
-        div.appendChild(fighterName)
+        buttonsContainer.appendChild(fighterName)
 
         this.limbs.forEach(limb =>{
             const button = document.createElement("button")
@@ -126,53 +108,59 @@ class Fighter {
                     case (getPercent(limb.fullHealth, limb.health) <= 0):
                       button.setAttribute("disabled", "");
                       break;
-                }
-                // пытался спомощью switch изменять кнопки
-                // healthValue.value = this.health //вывод урона на панель progress
-                
+                }              
             })
-            div.appendChild(button)
+            buttonsContainer.appendChild(button)
         })
-        fighterConteiner.appendChild(div)  
+        return buttonsContainer
+        // fighterConteiner.appendChild(div)  
 
 
     }   
     createFighterImg(){
       const selectElement = document.querySelector("#char") // находим элемент со значениями(value) персонажей
-      const div = document.createElement("div") //создаем новый элемент
-      div.classList.add("fighterImage") //добовляем класс элементу и в css расписываем как далеко и как персонажи будут стоять
+    //   const div = document.createElement("div") //создаем новый элемент
+    //   div.classList.add("fighterImage") //добовляем класс элементу и в css расписываем как далеко и как персонажи будут стоять
         const selectedCharacter = selectElement.value // инициализируем значение. Приводим его к готовности использования
-        if(selectedCharacter === "kratos"){ //если мы в списке выбираем значение kratos
-          const img = document.createElement("img") //тогда создаеться новый элемент img
-          img.classList.add("fighter1") //этому элемента элементу даем класс 
-          img.src = "fighter/21425_kratos-removebg-preview.png"; //и вызываем фотографию
-          div.appendChild(img)//указываем что новый элемент дочерний ранее созданого элемента
-      }else if(selectedCharacter === "Sasuke"){
-          const img = document.createElement("img")
-          img.classList.add("fighter1")
-          img.src = "fighter/fighter2-1-removebg-preview.png"
-          div.appendChild(img)
-      }else if(selectedCharacter === "GORO"){
-          const img = document.createElement("img")
-          img.classList.add("fighter1")
-          img.src = "fighter/4083864-9971075880-Princ-removebg-preview.png"
-          div.appendChild(img)
-      }else if(selectedCharacter === "Saitama"){
-          const img = document.createElement("img")
-          img.classList.add("fighter1")
-          img.src = "fighter/png-clipart-clark-kent-goku-one-punch-man-saitama-anime-one-punch-s-comics-superhero-removebg-preview.png"
-          div.appendChild(img);
-      }
-      fighterImage.appendChild(div)//так же указываем что ранее созданый элемент дочерний элемента который мы нашли через document в нашем html, 
+        const fighterImg = document.createElement("img") //тогда создаеться новый элемент img
+        fighterImg.classList.add("fighter__img") // Назначаем класс для img
+        switch(true){
+            case selectedCharacter === "kratos": //если мы в списке выбираем значение kratos
+                fighterImg.src = "fighter/21425_kratos-removebg-preview.png" //и вызываем фотографию
+                break;
+            case selectedCharacter === "Sasuke":
+                fighterImg.src = "fighter/fighter2-1-removebg-preview.png"
+                break;
+            case selectedCharacter === "GORO":
+                fighterImg.src = "fighter/4083864-9971075880-Princ-removebg-preview.png"
+                break;
+            case selectedCharacter === "Saitama":
+                fighterImg.src = "fighter/png-clipart-clark-kent-goku-one-punch-man-saitama-anime-one-punch-s-comics-superhero-removebg-preview.png"
+                break;
+        }
+        return fighterImg
+    //   div.appendChild(fighterImg); //img дочерний элемент div 
+    //   fighterImage.appendChild(div)//так же указываем что ранее созданый элемент дочерний элемента который мы нашли через document в нашем html, 
     }
 
-    healthValue(){
-const healthBar = document.querySelector(".healthValue")
+    createHealthValue(){
+        // const healthBar = document.querySelector(".healthValue")
         const healthValue = document.createElement("progress")
-        healthValue.max = 100
+        healthValue.max = FIGHTER_HEALTH;
         healthValue.value = this.health //вывод урона на панель progress
         healthValue.classList.add("fighterHealthBar")
-        healthBar.appendChild(healthValue)
+        healthValue.setAttribute("id", this.name+ "-healthBar") //что бы отражалось здоровье мы даем уникальное значение id которое будет создаваться указывая имя игрока + healthBar
+        return healthValue
+        // healthBar.appendChild(healthValue)
+    }
+
+    createFighter(){
+        const fighterDiv = document.createElement("div")
+        fighterDiv.classList.add("fighterUl__fighter")
+        fighterDiv.appendChild(this.createHealthValue())
+        fighterDiv.appendChild(this.createFighterImg())
+        fighterDiv.appendChild(this.createFighterButtons())
+        fighterConteiner.appendChild(fighterDiv)
     }
 }
 
@@ -181,12 +169,10 @@ const maxCalls = 2;
 
 
 testButton.addEventListener("click", () => {
-    let fighter = new Fighter(document.querySelector("#fighterName").value, fighterHealth, limbs);
+    let fighter = new Fighter(document.querySelector("#fighterName").value, FIGHTER_HEALTH, limbs);
     if(callCount < maxCalls){
         callCount++;
         fighter.createFighter()
-        fighter.createFighterImg()
-        fighter.healthValue()
     };
 });
 
@@ -205,25 +191,17 @@ class Limb {
             this.gettingDamage = randomDmg();
             this.health -= this.gettingDamage;
             if (this.health > 0) {
-                const chatText = document.createElement("p")
-                chatText.classList.add("chatText")
-                chatText.textContent = `У конечности ${this.name} осталось ${this.health} единиц здоровья`;
-                gameChat.appendChild(chatText)
+                // const chatText = document.createElement("p")
+                // chatText.classList.add("chatText")
+                // chatText.textContent = `У конечности ${this.name} осталось ${this.health} единиц здоровья`;
+                // gameChat.appendChild(chatText)
+                //отражает урон конечности, на данный момент нету необходимости!
             } else {
                 this.isBroken = true;
             }
         }
     }
 }
-
-
-// let fighter = new Fighter(document.querySelector("#fighterName").value, fighterHealth, limbs);
-const smith = new Fighter("Smith", fighterHealth, limbs);
-const fighter1 = document.querySelector("#Fighter-1", ".button")
-const leftLeg1 = document.querySelector("#Left-leg-1", ".button")
-const rightLeg1 = document.querySelector("#Right-leg-1", ".button")
-const leftArm1 = document.querySelector("#Left-arm-1", ".button")
-const rightArm1 = document.querySelector("#Right-arm-1", ".button")
 
 function getPercent(fullNumber, chapterNumber) {
     return fullNumber * (chapterNumber / 100) * 100
@@ -268,3 +246,24 @@ formCreateFighter.addEventListener("mousedown", (e) => {
     document.addEventListener("mouseup", theEnd);
 });
 
+function notifyMe() {
+    // Проверяем наличие Notification API в браузере
+    if (!("Notification" in window)) {
+      console.log("Нет поддержки Notification API");
+  
+    // Если Notification API и разрешение на отправку
+    // есть, то отправим уведомление
+    } else if (Notification.permission === "granted") {
+       new Notification("Hello!");
+  
+    // Если Notification API есть, но нет разрешения и нет
+    // запрета, то можно запросить разрешение
+    } else if (Notification.permission !== "denied") {
+      Notification.requestPermission()
+        .then(function (permission) {
+           if (permission === "granted") {
+             var notification = new Notification("Hi there!");
+           }
+        });
+      }
+    }

@@ -17,17 +17,10 @@
 
     .fighterUl{
         display: grid!important;
-        margin-left: 50px!important;
         flex-direction: row;
-        grid-template-columns: repeat(2, 10%)!important; 
+        grid-template-columns: repeat(2, 30%)!important; 
         justify-content: space-around!important;
-    }
-
-    .limbsButtons{
-        flex-direction: column!important;
-    }
-
-    
+    }   
 }
 
 @media only screen and (min-width: 376px) and (max-width: 767px){
@@ -38,16 +31,10 @@
 
     .fighterUl{
         display: grid!important;
-        margin-left: 50px!important;
         flex-direction: row;
-        grid-template-columns: repeat(2, 10%)!important; 
+        grid-template-columns: repeat(2, 30%)!important; 
         justify-content: space-around!important;
     }
-
-    .limbsButtons{
-        flex-direction: column!important;
-    }
-
 }
 
 @media only screen and (min-width: 0px) and (max-width: 375px){
@@ -57,16 +44,10 @@
 
     .fighterUl{
         display: grid!important;
-        margin-left: 50px!important;
         flex-direction: row;
-        grid-template-columns: repeat(2, 10%)!important; 
+        grid-template-columns: repeat(2, 30%)!important; 
         justify-content: space-around!important;
     }
-
-    .limbsButtons{
-        flex-direction: column!important;
-    }
-
 }
 
 
@@ -98,18 +79,25 @@ body{
 
 }
 
-.fighterImage{
+/* .fighterImage{
     display: grid;
     justify-content: center; 
     grid-template-columns: repeat(2, 37%); 
     justify-content: space-between;
-}
+    height: 500px;
+} */
 
 .fighterUl{
     display: grid;
     margin-left: 50px;
     grid-template-columns: repeat(2, 30%); 
     justify-content: space-around;
+}
+
+.fighterUl__fighter{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .limbsButtons{
@@ -135,8 +123,9 @@ body{
     background: green;
     transform-origin: center;
     position: relative;
-    top: 37px;
-    left: -20px;
+    width: 100%;
+    /* top: 37px;
+    left: -20px; */
 }
 
 .fighterHealthBar::-webkit-progress-bar {
@@ -151,16 +140,10 @@ body{
 }
 
 
-.fighter1{
-    width: 250%;
-    height: auto;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-.fighter2{
+.fighter__img{
     width: 100%;
+    height: 50%!important;
+    margin-top: 55px;
     height: auto;
     background-size: cover;
     background-repeat: no-repeat;
