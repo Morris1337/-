@@ -13,6 +13,8 @@ const gameChat = document.querySelector("#chat")
 const chatInput = document.querySelector("#chatInput")
 const chatButton = document.querySelector("#chatButton")
 
+
+
 const limbs = [
     { limbName: "Head", limbHealth: 10, gettingDamage: 5}, //добавил голову
     { limbName: "Body", limbHealth: 50, gettingDamage: 10},  //добавил туловеще
@@ -30,6 +32,18 @@ const skills = [
     {skillName: "Midle kick", energy: 8, hitDamage: 8},
     {skillName: "Hight kick", energy: 9, hitDamage: 11}
 ]
+
+const buyElements = document.getElementsByClassName("shop")
+
+skills.forEach(skill =>{
+    const skillItem = document.createElement("div")
+    skillItem.classList.add("skill")
+    skillItem.textContent = `
+    <p>Skill Name: ${skill.skillName}</p>
+    <p>Energy Cost: ${skill.energy}</p>
+    <p>Hit Damage: ${skill.hitDamage}</p>`;
+    buyElements.appendChild(skillItem)
+})
 
 //TODO добавить оружие для бойца
 // const weapon = [
@@ -289,3 +303,4 @@ function notifyMe() {
         });
       }
     }
+
