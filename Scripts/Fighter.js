@@ -66,6 +66,7 @@ class Fighter {
             const damage = randomDmg()
             this.health -= damage; //убрал рандомный урон для всего корпуса
             healthBar.value -= damage;
+
             const chatText = document.createElement("p")
             chatText.classList.add("chatText")
             if (this.health > 0) {
@@ -75,6 +76,7 @@ class Fighter {
                 chatText.textContent = `Боец ${this.name} повержен`;
             }
             gameChat.appendChild(chatText)
+            gameChat.insertBefore(chatText, gameChat.firstChild);
         }
     }
 
@@ -222,6 +224,16 @@ const getCoords = (elem) => {
     };
 };
 
+const fighterName = document.getElementById("fighterName")
+
+fighterName.addEventListener("dragover", (e) => {
+    e.preventDefault();
+})
+
+fighterName.addEventListener("drop", (e) => {
+    e.preventDefault();
+})
+
 formCreateFighter.addEventListener("mousedown", (e) => {
     const coords = getCoords(formCreateFighter);
     const shiftX = e.pageX - coords.left;
@@ -245,6 +257,7 @@ formCreateFighter.addEventListener("mousedown", (e) => {
     document.addEventListener("mousemove", moveAt);
     document.addEventListener("mouseup", theEnd);
 });
+
 
 function notifyMe() {
     // Проверяем наличие Notification API в браузере

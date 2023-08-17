@@ -73,10 +73,8 @@ body{
 
 .background{
     background-image: url(background/Mortal-Kombat-11-tile-image.jpg);
-    height: 46vw;
     background-size: cover;
     background-position: center;
-
 }
 
 /* .fighterImage{
@@ -184,22 +182,19 @@ body{
     animation-duration: 1.5s;
     animation-fill-mode: both;
     animation-name: fadeIn;
-    /* z-index: 1; */
 }
 
 .openForm.open{
-    /* z-index: 3; */
     display: flex;
 }
 
 .openForm.close{
-    /* z-index: 1; */
     display: flex;
     animation-name: fadeOut;
 }
 
 
-/* #createFighterClose{
+#createFighterClose{
     display: none;
     margin-left: 20px;
     animation-duration: 1.5s;
@@ -213,7 +208,7 @@ body{
 
 #createFighterClose.close{
     animation-name: fadeOut!important;
-} */
+}
 
 .testCreate{
     display: none;
@@ -242,11 +237,36 @@ body{
     background-color: #eee;
     width: 400px;
     height: 100px;
-    border-radius: 20px;
+    border-radius: 8px;
     margin: auto;
-    margin-top: 20px;
+    margin-top: 10px;
     overflow: auto;
 }
+
+  #chat::-webkit-scrollbar {
+    /* margin-left: 10px; */
+    width: 10px; /* Ширина вертикальной полосы */
+    background-color: transparent;
+    position: relative; /* Или relative, в зависимости от нужного позиционирования */
+    right: 0; /* Положение по правому краю */
+    top: 0; /* Положение по верхнему краю */
+  }
+  
+  #chat::-webkit-scrollbar-track {
+    background-color: #b407078a;
+    border-radius: 10px;
+  }
+  
+  /* Для ползунка (сама полоса прокрутки) */
+  #chat::-webkit-scrollbar-thumb {
+    background-color: #afadad;
+    border-radius: 10px;
+  }
+  
+  /* При наведении на ползунок */
+  #chat::-webkit-scrollbar-thumb:hover {
+    background-color: #383838;
+  }
 
 #textDiv{
 display: flex;
@@ -256,6 +276,8 @@ margin-top: 10px;
 
 .chatText{
     margin-left: 20px;
+    white-space: normal;
+    word-wrap: break-word;
 }
 
 @keyframes fadeIn {
