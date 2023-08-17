@@ -72,7 +72,7 @@ body{
 }
 
 .background{
-    background-image: url(background/Mortal-Kombat-11-tile-image.jpg);
+    background-image: url(../background/Mortal-Kombat-11-tile-image.jpg);
     background-size: cover;
     background-position: center;
 }

@@ -22,6 +22,15 @@ const limbs = [
     { limbName: "Left Leg", limbHealth: 10, gettingDamage: 3 },
 ];
 
+const skills = [
+    {skillName: "Jab", energy: 3, hitDamage: 5},
+    {skillName: "Cross", energy: 4, hitDamage: 6},
+    {skillName: "Upper cord", energy: 5, hitDamage: 8},
+    {skillName: "Low kick", energy: 8, hitDamage: 9},
+    {skillName: "Midle kick", energy: 8, hitDamage: 8},
+    {skillName: "Hight kick", energy: 9, hitDamage: 11}
+]
+
 //TODO добавить оружие для бойца
 // const weapon = [
 //     {weaponName: "knife", weaponDamage: 5}
