@@ -65,6 +65,20 @@ body{
     height: 150vh;
 }
 
+button{
+    text-align: center;
+    transition: 0.5s;
+    background-size: 200% auto;
+    font-size: 20px;
+    color: white;
+    box-shadow: 0 0 10px #eee;
+    border-radius: 20px;
+}
+
+input{
+    border-radius: 10px;
+}
+
 .imageSize{
     background-size: cover;
     margin: 0;
@@ -84,6 +98,12 @@ body{
     justify-content: space-between;
     height: 500px;
 } */
+
+#profile{
+    margin-left: 20px;
+    background-image: linear-gradient(to right, #6d0404 0%, #c92d2d 51%, #6d0404 100%);
+
+}
 
 .fighterUl{
     display: grid;
@@ -193,10 +213,50 @@ body{
     animation-name: fadeOut;
 }
 
+.profile-log{
+    color: white;
+    position: absolute;
+    width: fit-content;    padding: 10px;
+    line-height: 26px;
+    border-radius: 1px;
+    background-color: rgba(128, 128, 128, 0.7);
+    display: none;
+    animation-name: fadeIn;
+    animation-duration: 1.5s;
+    animation-fill-mode: both;
+}
+
+.profile-log.open{
+    display: flex;
+}
+
+.profile-log.close{
+    display: flex;
+    animation-name: fadeOut;
+}
+
+.shop{
+    display: none;
+}
+
+.shop.open{
+    display: flex;
+}
+
+.shop.close{
+    display: flex;
+    animation-name: fadeOut;
+}
+
+.skill{
+    border: 3px solid black;
+    margin-left: 3px;
+    padding: 5px;
+}
+
 
 #createFighterClose{
     display: none;
-    margin-left: 20px;
     animation-duration: 1.5s;
     animation-fill-mode: both;
     animation-name: fadeIn;
@@ -211,15 +271,17 @@ body{
 }
 
 .testCreate{
+
     display: none;
-    margin-left: 20px;
+    margin-top: 10px;
     animation-duration: 1.5s;
     animation-fill-mode: both;
     animation-name: fadeIn;
+    justify-content: space-around;
 }
 
 .testCreate.open{
-    display: block;
+    display: flex;
 }
 
 .testCreate.close{
@@ -278,6 +340,11 @@ margin-top: 10px;
     margin-left: 20px;
     white-space: normal;
     word-wrap: break-word;
+}
+
+#chatButton{
+    background-image: linear-gradient(to right, #6d0404 0%, #c92d2d 51%, #6d0404 100%);
+    margin-left: 10px;
 }
 
 @keyframes fadeIn {

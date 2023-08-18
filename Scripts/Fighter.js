@@ -3,17 +3,20 @@
 
 const fighterConteiner = document.querySelector(".fighterUl") //Кнопки умений персонажа
 const fighterImage = document.querySelector(".fighterImage")// место где создаеться картинка бойца
-const createFighterBtn = document.querySelector("#createFighter")//Кнопка открыть форму для создания персонажа
-const formCreateFighter = document.querySelector(".openForm") //Форма для создания персонажа
-const formCreateFighterClose = document.querySelector("#createFighterClose") //Кнопка закрыть форму для создания персонажа
 const btnTest = document.querySelector(".testCreate") //Контейнер в котором лежат кнопки для закрытия формы и тестова кнопка
-const testButton = document.querySelector("#testButton") //Тестовая кнопка для вызова кнопок умений
+const createBtn = document.querySelector("#createBtn") //Тестовая кнопка для вызова кнопок умений
 
 const gameChat = document.querySelector("#chat")
 const chatInput = document.querySelector("#chatInput")
 const chatButton = document.querySelector("#chatButton")
 
-
+//TODO добавить оружие для бойца
+// const weapon = [
+//     {weaponName: "knife", weaponDamage: 5}
+//     {weaponName: "sword", weaponDamage: 10}
+//     {weaponName: "spear", weaponDamage: 15}
+//     {weaponName: "axe", weaponDamage: 20}
+// ]
 
 const limbs = [
     { limbName: "Head", limbHealth: 10, gettingDamage: 5}, //добавил голову
@@ -33,29 +36,38 @@ const skills = [
     {skillName: "Hight kick", energy: 9, hitDamage: 11}
 ]
 
-const buyElements = document.getElementsByClassName("shop")
+const openProfileLog = document.getElementById("profile")
+const profileLog = document.querySelector(".profile-log")
+
+openProfileLog.addEventListener("click", ()=>{
+    profileLog.classList.toggle("open")
+})
+
+const openShop = document.getElementById("openShop")
+const buyElements = document.querySelector(".shop")
+
+openShop.addEventListener("click", ()=>{
+    buyElements.classList.toggle("open")
+})
 
 skills.forEach(skill =>{
     const skillItem = document.createElement("div")
     skillItem.classList.add("skill")
-    skillItem.textContent = `
+    skillItem.innerHTML = `
     <p>Skill Name: ${skill.skillName}</p>
     <p>Energy Cost: ${skill.energy}</p>
     <p>Hit Damage: ${skill.hitDamage}</p>`;
     buyElements.appendChild(skillItem)
 })
 
-//TODO добавить оружие для бойца
-// const weapon = [
-//     {weaponName: "knife", weaponDamage: 5}
-//     {weaponName: "sword", weaponDamage: 10}
-//     {weaponName: "spear", weaponDamage: 15}
-//     {weaponName: "axe", weaponDamage: 20}
-// ]
-
-
 
 const FIGHTER_HEALTH = 100;
+const FIGHTER_ENERGY = 100;
+
+
+const createFighterBtn = document.querySelector("#createFighter")//Кнопка открыть форму для создания персонажа
+const formCreateFighter = document.querySelector(".openForm") //Форма для создания персонажа
+const formCreateFighterClose = document.querySelector("#createFighterClose") //Кнопка закрыть форму для создания персонажа
 
 createFighterBtn.addEventListener("click", ()=>{
     formCreateFighter.classList.remove("close")
@@ -89,7 +101,6 @@ class Fighter {
             const damage = randomDmg()
             this.health -= damage; //убрал рандомный урон для всего корпуса
             healthBar.value -= damage;
-
             const chatText = document.createElement("p")
             chatText.classList.add("chatText")
             if (this.health > 0) {
@@ -193,7 +204,7 @@ let callCount = 0;
 const maxCalls = 2;
 
 
-testButton.addEventListener("click", () => {
+createBtn.addEventListener("click", () => {
     let fighter = new Fighter(document.querySelector("#fighterName").value, FIGHTER_HEALTH, limbs);
     if(callCount < maxCalls){
         callCount++;
