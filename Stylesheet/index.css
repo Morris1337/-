@@ -70,9 +70,10 @@ button{
     transition: 0.5s;
     background-size: 200% auto;
     font-size: 20px;
-    color: white;
+    color: black;
     box-shadow: 0 0 10px #eee;
     border-radius: 20px;
+    
 }
 
 input{
@@ -102,7 +103,7 @@ input{
 #profile{
     margin-left: 20px;
     background-image: linear-gradient(to right, #6d0404 0%, #c92d2d 51%, #6d0404 100%);
-
+    color: white;
 }
 
 .fighterUl{
@@ -345,6 +346,7 @@ margin-top: 10px;
 #chatButton{
     background-image: linear-gradient(to right, #6d0404 0%, #c92d2d 51%, #6d0404 100%);
     margin-left: 10px;
+    color: white;
 }
 
 @keyframes fadeIn {

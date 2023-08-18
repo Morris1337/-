@@ -56,7 +56,8 @@ skills.forEach(skill =>{
     skillItem.innerHTML = `
     <p>Skill Name: ${skill.skillName}</p>
     <p>Energy Cost: ${skill.energy}</p>
-    <p>Hit Damage: ${skill.hitDamage}</p>`;
+    <p>Hit Damage: ${skill.hitDamage}</p>
+    <button>Buy</button>`;
     buyElements.appendChild(skillItem)
 })
 
